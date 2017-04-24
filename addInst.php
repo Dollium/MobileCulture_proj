@@ -150,14 +150,37 @@ td, th {
         <div class="addSchool">
           <div class="row">
             <div class="form-inline">
+              <?php if(!empty($_SESSION['success_registration']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['success_registration']; ?> <?php
+              unset($_SESSION['success_registration']);
+              } ?>
+              <?php if(!empty($_SESSION['email_taken']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['email_taken']; ?> <?php
+              unset($_SESSION['email_taken']);
+              } ?>
+
+              <?php if(!empty($_SESSION['error']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['error']; ?> <?php
+              unset($_SESSION['error']);
+              } ?>
 
             <table class="register">
               <tr>
-		<form  action="instToDTB.php" method="POST" style="margin:auto;">
-                <td>
-
-                  
-                  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="instID" id="instID">
+		              <form  action="instToDTB.php" method="POST" style="margin:auto;">
+                    <td>
+                      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="instID" id="instID">
                       <?php
                       $query = "SELECT institution_id, Name FROM institution";
                       $result = mysqli_query($conn, $query);
@@ -166,21 +189,18 @@ td, th {
                          echo  "<option value=". $row["institution_id"] .">".$row["Name"]."</option>";
                       }
                       ?>
-                </select>
+                      </select>
+                    </td>
+                    <td>
+                      <label class="sr-only" for="email">Email</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="email" name="institutionEmail" placeholder="Email">
 
-
-                </td>
-
-                <td>
-                <label class="sr-only" for="email">Email</label>
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" id="email" name="institutionEmail" placeholder="Email">
-                    
-                </div>
-                <td>
-
-                <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
                 </td>
                 </form>
@@ -191,8 +211,6 @@ td, th {
                     if (isset($_POST['instID']))
                     {
                       $_SESSION['instID'] = mysqli_real_escape_string($conn, ($_POST['instID']));
-
-
                     }
 
                     print_r($_SESSION);
@@ -213,7 +231,11 @@ td, th {
             <!--//UPLOAD CSV FILE-->
             <br>
         </div>
-       
+        <form action="Delete.php" method="post">
+
+          <!-- Button for checkbox deletion (clicking this will delete checked rows) -->
+        <button type="submit" value="dltBox" name="dltBox" onclick="return deleteConfirm()" formaction="Delete.php" class="delete_button btn btn-primary">Delete selected records</button>
+
         <table class="user_log" style="overflow-x:auto; max-width:100%;">
 
           <tr>
@@ -238,7 +260,7 @@ td, th {
 <?php    } ?>
         </table>
 
-
+    </form>
 
 
 
