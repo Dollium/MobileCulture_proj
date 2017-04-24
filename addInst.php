@@ -153,9 +153,10 @@ td, th {
 
             <table class="register">
               <tr>
+		<form  action="instToDTB.php" method="POST" style="margin:auto;">
                 <td>
 
-                  <form  action="instToDTB.php" method="POST" style="margin:auto;">
+                  
                   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="instID" id="instID">
                       <?php
                       $query = "SELECT institution_id, Name FROM institution";
@@ -175,7 +176,7 @@ td, th {
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon">@</div>
                     <input type="text" class="form-control" id="email" name="institutionEmail" placeholder="Email">
-                    </td>
+                    
                 </div>
                 <td>
 
@@ -212,10 +213,11 @@ td, th {
             <!--//UPLOAD CSV FILE-->
             <br>
         </div>
-        </center>
+       
         <table class="user_log" style="overflow-x:auto; max-width:100%;">
 
           <tr>
+              <th><input type="checkbox" id="checkAll"></th>
               <th>Name</th>
               <th>Email</th>
               <th>Remove</th>
@@ -227,10 +229,18 @@ td, th {
           $result = $conn->query($sql);
 
           while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["Email"]. "</td><td>" ?>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button> <?php echo "</td></tr>";
-    } ?>
+            echo "<tr>";
+                            echo '<td><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
+                            echo "<td>" . $row['Name'] . "</td>";
+                            echo "<td>" . $row['Email'] . "</td>";
+                            echo '<td><a href="delete.php?did='. $row['user_id'] .'" onclick="return deleteConfirm()" id="delete"><label for="delete"><i class="fa fa-times" aria-hidden="true"></i></label></a></td>';
+                            echo "</tr>"; ?>
+<?php    } ?>
         </table>
+
+
+
+
 
 
 
@@ -264,6 +274,29 @@ td, th {
                 })
             });
         });
+
+
+        $("#checkAll").click(function(){
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+        function deleteConfirm(){
+            var result = confirm("Are you sure to delete users?");
+            if(result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function deleteConfirm(){
+            var result = confirm("Are you sure to delete users?");
+            if(result){
+                return true;
+            }else{
+                return false;
+            }
+        }
         </script>
     </div>
 </body>
