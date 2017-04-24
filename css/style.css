@@ -99,3 +99,21 @@ tr:nth-child(even) {
         align-self: center;
     }
 }
+@media screen and (min-width: 992px) {
+    #columnchart_material{
+        display: flex;
+    }
+    div#stacked_chart{
+        display: none;
+    }
+}
+@media screen and (max-width: 992px) {
+    #columnchart_material{
+        display: none;
+    }
+    #stacked_chart{
+        display: flex;
+    }
+}
+
+
