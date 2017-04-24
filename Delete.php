@@ -12,7 +12,7 @@ if(isset($_GET['did'])) {
     {
 
         $delete_id = mysqli_real_escape_string($conn, $_GET['did']);
-      $sql2 = mysqli_query($conn, "DELETE FROM student WHERE user_id = '".$delete_id."'");
+        $sql2 = mysqli_query($conn, "DELETE FROM student WHERE user_id = '".$delete_id."'");
 
 
         if($sql2)
@@ -52,4 +52,4 @@ elseif($_POST["dltBox"]) {
 else {
   echo "ERROR";
 }
-header('location:addstudent_resp.php');
+header('Location: ' . $_SERVER['HTTP_REFERER']);
