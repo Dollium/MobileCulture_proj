@@ -9,10 +9,11 @@ include 'config.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
-$ID = $_SESSION['instID'];
+$ID = mysqli_real_escape_string($conn, ($_POST['instID']));
 if(isset($_POST['institutionEmail'])){
     var_dump($_POST);
-    echo "Institution id is ".$_SESSION['instID']."";
+
+    echo "Institution id is ".$ID."";
     $insertToUser = mysqli_query($conn, "INSERT INTO user
     (Email, Password, user_type_id ) VALUES ('".$_POST['institutionEmail']."','".md5(123456)."'
 , 4)");
@@ -31,7 +32,7 @@ if(isset($_POST['institutionEmail'])){
         $thisInstID = $row[0];
 
     }
- echo $thisInstID.$_SESSION['instID'];
+ echo $thisInstID.$ID;
 
     $insertToInstitution = mysqli_query($conn, "UPDATE `institution` SET
     `institution_user_id` = '$thisInstID' WHERE `institution_id` = '$ID'");
