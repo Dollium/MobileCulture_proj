@@ -167,7 +167,7 @@ td, th {
                       ?>
                 </select>
 
-                </form>
+
                 </td>
 
                 <td>
@@ -178,10 +178,11 @@ td, th {
                     </td>
                 </div>
                 <td>
-                  <form action="instToDTB.php" method="POST">
+
                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
-              </form>
+
                 </td>
+                </form>
               </tr>
             </table>
             <?php
@@ -221,7 +222,7 @@ td, th {
               <th class="mobile"> Registered users </th>
           </tr>
           <?php
-          $sql = "SELECT * FROM user AS us INNER JOIN institution AS scl ON us.user_id = scl.institution_user_id WHERE user_type_id = '4'";
+          $sql = "SELECT * FROM user AS us LEFT JOIN institution AS scl ON us.user_id = scl.institution_user_id WHERE user_type_id = '4'";
 
           $result = $conn->query($sql);
 
@@ -245,21 +246,7 @@ td, th {
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
         <script>
-        function uploadManually() {
-            $.ajax({
-                url: "instToDTB.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
-                type: "post",
-                dateType: "text",
-                data: {
-                    instManually: $('#instID').val(),
-                    emailManually: $('#email').val()
-                },
-                success: function (result) {
-                    alert(result),
-                        $('#email').val("")
-                }
-            })
-        }
+
         $(document).ready(function(){
             $('#upload_csv').on("submit", function(e){
                 e.preventDefault(); //form will not submitted
