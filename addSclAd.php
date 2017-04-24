@@ -145,12 +145,37 @@ td, th {
         <div class="addSchool">
           <div class="row">
             <div class="form-inline">
+              <?php if(!empty($_SESSION['success_registration']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['success_registration']; ?> <?php
+              unset($_SESSION['success_registration']);
+              } ?>
+              <?php if(!empty($_SESSION['email_taken']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['email_taken']; ?> <?php
+              unset($_SESSION['email_taken']);
+              } ?>
 
+              <?php if(!empty($_SESSION['error']))
+              {
+              ?>
+              <div class="alert danger"></div>
+              <?php
+              echo $_SESSION['error']; ?> <?php
+              unset($_SESSION['error']);
+              } ?>
             <table class="register">
               <tr>
+		       <form action="schoolToDTB.php" method="POST" style="margin:auto;">
                 <td>
 
-                  <form  method="POST" style="margin:auto;">
+                 
                   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="schoolID" id="schoolID">
                       <?php
                       $query = "SELECT school_id, Name FROM school";
@@ -160,45 +185,49 @@ td, th {
                          echo  "<option value=". $row["school_id"] .">".$row["Name"]."</option>";
                       }
                       ?>
+                      <?php
+
+                              if (isset($_POST['schoolID']))
+                              {
+                                $_SESSION['schoolID'] = mysqli_real_escape_string($conn, ($_POST['schoolID']));
+
+                              }
+
+
+
+                              ?>
 
                 </select>
 
-                </form>
+
 
 
             </td>
 
                   <td>
                 <label class="sr-only" for="name">Name</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="schoolName" placeholder="Name">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name">
               </td>
                 <td>
                 <label class="sr-only" for="surName">Surname</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="schoolSurname" placeholder="Surname">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surname" name="surname" placeholder="Surname">
                 </td>
                 <td>
                 <label class="sr-only" for="email">Email</label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" id="email" name="schoolEmail" placeholder="Useremail">
-                    </td>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Useremail">
+                    
                 </div>
+			</td>
                 <td>
-                <button type="submit" class="btn btn-primary" onclick=uploadManually()><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
                 </td>
+                  </form>
               </tr>
             </table>
-            <?php
+            <?php print_r($_SESSION); ?>
 
-                    if (isset($_POST['schoolID']))
-                    {
-                      $_SESSION['schoolID'] = mysqli_real_escape_string($conn, ($_POST['schoolID']));
-
-                    }
-
-                      print_r($_SESSION);
-
-                    ?>
             </div>
           </div>
 
@@ -215,10 +244,14 @@ td, th {
             <!--//UPLOAD CSV FILE-->
             <br>
         </div>
-        </center>
+        <form action="Delete.php" method="post">
+
+          <!-- Button for checkbox deletion (clicking this will delete checked rows) -->
+        <button type="submit" value="dltBox" name="dltBox" onclick="return deleteConfirm()" formaction="Delete.php" class="delete_button btn btn-primary">Delete selected records</button>
         <table class="user_log" style="overflow-x:auto; max-width:100%;">
 
           <tr>
+              <th><input type="checkbox" id="checkAll"></th>
               <th>Name</th>
               <th>Surname</th>
               <th>Email</th>
@@ -227,16 +260,23 @@ td, th {
               <th class="mobile"> Registered users </th>
           </tr>
           <?php
-          $sql = "SELECT * FROM user AS us INNER JOIN school AS scl ON us.user_id = scl.school_admin_id WHERE user_type_id = '1'";
+          $sql = "SELECT * FROM user AS us LEFT JOIN school AS scl ON us.user_id = scl.school_admin_id WHERE user_type_id = '1'";
 
           $result = $conn->query($sql);
 
           while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td>" . $row["First_name"]. " </td><td> " . $row["Last_name"]. "</td><td> " . $row["Email"]. "</td><td>" . $row["Name"]. "</td><td>" ?>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button> <?php echo "</td></tr>";
-    } ?>
-        </table>
+            echo "<tr>";
+                            echo '<td><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
+                            echo "<td>" . $row['First_name'] . "</td>";
+                            echo "<td>" . $row['Last_name'] . "</td>";
+                            echo "<td>" . $row['Email'] . "</td>";
+                            echo "<td>" . $row['Name'] . "</td>";
 
+                            echo '<td><a href="delete.php?did='. $row['user_id'] .'" onclick="return deleteConfirm()" id="delete"><label for="delete"><i class="fa fa-times" aria-hidden="true"></i></label></a></td>';
+                            echo "</tr>"; ?>
+  <?php    } ?>
+        </table>
+</form>
 
 
 
@@ -287,6 +327,28 @@ td, th {
                 })
             });
         });
+
+        $("#checkAll").click(function(){
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+        function deleteConfirm(){
+            var result = confirm("Are you sure to delete users?");
+            if(result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function deleteConfirm(){
+            var result = confirm("Are you sure to delete users?");
+            if(result){
+                return true;
+            }else{
+                return false;
+            }
+        }
         </script>
     </div>
 </body>
