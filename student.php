@@ -121,7 +121,11 @@ height: 470px; text-align:center;
     .min_visits td:nth-child(n) {
       border-right: 1px solid #666B85;
     }
-
+    .student_id
+    {
+          margin-bottom: 10px;
+          margin-top: 40px;
+    }
     .student_id td, .student_id th {
         font-size: 24px;
         background-color: #FFF;
@@ -135,7 +139,10 @@ height: 470px; text-align:center;
     {
       font-weight: bold;
     }
-
+    #badge
+    {
+      color: #25b825;
+    }
 
     .centered
     {
@@ -317,6 +324,10 @@ height: 470px; text-align:center;
               bottom: 70px;
                   width: 179px;
             }
+            .student_id
+            {
+              margin-top: 10px;
+            }
             .student_id td:first-child
             {
                display:none;
@@ -468,15 +479,14 @@ if($_SESSION["isStudent"] == true)
                 <h3><?php echo $row['Name'] ?></h3>
               </td>
             </tr>
-            <tr>
-              <td>
-                  <h3> Badge on this row</h3>
-              </td>
-              <td>
-              <h3>Badge here</h3>
-              </td>
-            </tr>
+
           </table>
+          <?php  $query = "SELECT COUNT(*) c FROM student_visits WHERE user_id = '$ID' AND institution_id = '1'";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+            if ($row['c'] >= '1'){
+              ?><i class="fa fa-check-square-o fa-2x" id="badge" aria-hidden="true"></i>
+            <?php echo $row['c'];  } ?>
 
       </div>
     </div>
