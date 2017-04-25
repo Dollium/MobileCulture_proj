@@ -116,7 +116,7 @@ height: 470px; text-align:center;
       {
         padding: 4px;
         padding-left: 20px;
-        bor
+       
       }
     .min_visits td:nth-child(n) {
       border-right: 1px solid #666B85;
@@ -486,7 +486,7 @@ if($_SESSION["isStudent"] == true)
             $row = mysqli_fetch_assoc($result);
             if ($row['c'] >= '1'){
               ?><i class="fa fa-check-square-o fa-2x" id="badge" aria-hidden="true"></i>
-            <?php echo $row['c'];  } ?>
+            <?php  } ?>
 
       </div>
     </div>
