@@ -52,7 +52,7 @@ $ID = $_SESSION['id'];
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#projects">
-                                <i class="fa fa-cog" aria-hidden="true"></i></i> Setting
+                                <i class="fa fa-cog" aria-hidden="true"></i> Setting
                             </a>
                         </li>
                     </ul>
@@ -85,17 +85,7 @@ $ID = $_SESSION['id'];
 <br/>
 
         <form  method="POST">
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0 institution" name="institution" id="institution">
-                <?php
-                $query = "SELECT * FROM institution";
-                $result = mysqli_query($conn, $query);
-                while($row = mysqli_fetch_array($result))
-                {
-                   echo  "<option value=". $row["institution_id"] .">".$row["Name"]."</option>";
-                }
-                ?>
-            </select>
-            <button name="date" type="submit" class="btn btn-primary date">Record a new visit</button>
+            <button name="scan" type="submit" class="btn btn-primary scan">Scan QR</button>
         </form>
         <br/>
         <?php
