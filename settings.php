@@ -104,7 +104,7 @@ $row = $result->fetch_assoc();
 }
     .centered
     {
-      margin:auto;
+      margin: 0 auto;
     }
     .bordered
     {
@@ -122,6 +122,23 @@ $row = $result->fetch_assoc();
       margin-top: 90px;
       vertical-align:top;
     }
+    #reset_pass_div
+    {
+      display:inline-block;
+      margin-top: 40px;
+      margin-bottom:40px;
+      vertical-align:top;
+    }
+    #email_result
+    {
+      max-width: 200px;
+      display: inline;
+    }
+    button.mobile
+    {
+      display:none;
+      margin-left: 20px;
+    }
     .passForm, .photoForm
     {
       margin-top: 40px;
@@ -135,6 +152,13 @@ $row = $result->fetch_assoc();
     .photoForm
     {
       display:inline;
+    }
+    .result p
+    {
+      max-width: 200px;
+      display:block;
+      padding-left:12px;
+
     }
     @media screen and (max-width: 992px)
     {
@@ -212,6 +236,20 @@ $row = $result->fetch_assoc();
         margin-left: 5px;
         margin-top:0;
       }
+      #email_result
+      {
+        max-width:100%;
+      }
+      button.desktop
+      {
+        display:none;
+      }
+      button.mobile
+      {
+        display:block;
+        margin-left:0;
+        margin-top: 10px;
+      }
     }
 
     </style>
@@ -281,7 +319,7 @@ if($_SESSION["isStudent"] == true)
         <div class="col-lg-3" style="display:inline-block;">
         <h5> Profile picture </h5>
       </div>
-        v
+
           <div class="crop">
           <!-- Photo from database -->
           <?php
@@ -348,6 +386,12 @@ elseif ($_SESSION["isSchool"] == true)
   <br>
   <br>
 </div>
+<div class="row">
+  <div class="main">
+    <h2> Settings </h2>
+  </div>
+
+</div>
 <?php }
 elseif ($_SESSION["isAdmin"] == true)
 {
@@ -388,20 +432,34 @@ elseif ($_SESSION["isAdmin"] == true)
   <br>
   <br>
 </div>
+<div class="row">
+  <div class="main">
+    <h2> Settings </h2>
+  </div>
 
+</div>
 <div class="row">
   <div class="col-lg-12">
     <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
-      <div class="col-lg-3" style="display:inline-block;">
-        <h5> Reset user password </h5>
+      <div class="col-lg-3" id="reset_pass_div">
+      <h5> Reset user password </h5>
+    </div>
+    <div class="col-lg-8 passForm">
+      <form method="POST" action="resetPass.php">
+      <div class="search-box" style="max-width: 200px; display:inline;">
+          <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Search user" />
+          <button type="submit" class="btn desktop" style="margin-left: 20px;">Submit</button>
+          <div class="col-lg-1 result" style="display:inline;">
       </div>
+      </div>
+      <button type="submit" class="btn mobile">Submit</button>
+
+
+    </form>
     </div>
-    <div class="col-lg-9 photoForm" style="">
-      <form  method="post" action="search.php?go"  id="searchform">
-11	      <input  type="text" name="name">
-12	      <input  type="submit" name="submit" value="Search">
-13	    </form>
-    </div>
+  </div>
+
+
   </div>
 </div>
 
@@ -410,12 +468,7 @@ elseif ($_SESSION["isAdmin"] == true)
 
 
       <div class="pass wrapper" style="margin: 0 15px 0 15px;">
-        <div class="row">
-          <div class="main">
-            <h2> Settings </h2>
-          </div>
 
-        </div>
         <div class="col-lg-3" id="pass_change_div">
         <h5> Change your password </h5>
       </div>
@@ -520,6 +573,17 @@ else { ?>
 ?>
 </div>
 
+
+<!-- jQuery first, then bootstrap js -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
@@ -527,7 +591,7 @@ $(document).ready(function(){
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
         if(inputVal.length){
-            $.get("searchdtb.php", {term: inputVal}).done(function(data){
+            $.get("search.php", {term: inputVal}).done(function(data){
                 // Display the returned data in browser
                 resultDropdown.html(data);
             });
@@ -544,10 +608,6 @@ $(document).ready(function(){
 });
 </script>
 
-<!-- jQuery first, then bootstrap js -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
+
+
 </body>
