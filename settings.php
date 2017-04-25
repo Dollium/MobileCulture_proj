@@ -30,6 +30,21 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <style>
+    .alert
+    {
+      margin-bottom: 0!important;
+
+    }
+    .danger
+    {
+      border: 1px solid #d33f3f;
+      background-color: rgba(247, 70, 70, 0.68);
+    }
+    .success
+    {
+      border: 1px solid #b4d6b4;
+    background-color: #c2f1c2;
+    }
     h2, h3
     {
           color: #0275d8!important;
@@ -295,7 +310,7 @@ if($_SESSION["isStudent"] == true)
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="settings.php">
-                      <i class="fa fa-cog" aria-hidden="true"></i></i> Setting
+                      <i class="fa fa-cog" aria-hidden="true"></i> Setting
                   </a>
               </li>
           </ul>
@@ -440,6 +455,22 @@ elseif ($_SESSION["isAdmin"] == true)
 </div>
 <div class="row">
   <div class="col-lg-12">
+    <?php if(!empty($_SESSION['email_exist']))
+    {
+    echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>"; ?> <?php
+    unset($_SESSION['email_exist']);
+    } ?>
+    <?php if(!empty($_SESSION['pass_reset']))
+    {
+    echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>"; ?> <?php
+    unset($_SESSION['pass_reset']);
+    } ?>
+
+    <?php if(!empty($_SESSION['error']))
+    {
+    echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
+    unset($_SESSION['error']);
+    } ?>
     <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
       <div class="col-lg-3" id="reset_pass_div">
       <h5> Reset user password </h5>
@@ -508,13 +539,13 @@ elseif ($_SESSION["isAdmin"] == true)
                <?php
               unset($_SESSION['passMatch']);
               } ?>
-<label for=""></label><button class="btn" type="submit" value="send">Change it</button>
+              <label for=""></label><button class="btn" type="submit" value="send">Change it</button>
 
 
           </form>
 
         </div>
-        <!-- Photo upload button -->
+
 
       </div>
 
@@ -523,8 +554,8 @@ elseif ($_SESSION["isAdmin"] == true)
 
     </div>
 
-  </div>
-</div>
+
+
 
 
 
@@ -561,8 +592,8 @@ else { ?>
             <br>
 
       </div>
-      </center>
-  </div>
+
+
 
 
 
