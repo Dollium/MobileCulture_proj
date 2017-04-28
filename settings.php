@@ -378,17 +378,12 @@ elseif ($_SESSION["isSchool"] == true)
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="addteacher_resp.php">
-                          <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Teacher
-                      </a>
-                  </li>
-                  <li class="nav-item">
                       <a class="nav-link" href="addstudent_resp.php">
                           <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Student
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="statistics.html">
+                      <a class="nav-link" href="settings.php">
                           <i class="fa fa-code" aria-hidden="true"></i> Setting
                       </a>
                   </li>
@@ -406,6 +401,45 @@ elseif ($_SESSION["isSchool"] == true)
     <h2> Settings </h2>
   </div>
 
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <?php if(!empty($_SESSION['email_exist']))
+    {
+    echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>"; ?> <?php
+    unset($_SESSION['email_exist']);
+    } ?>
+    <?php if(!empty($_SESSION['pass_reset']))
+    {
+    echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>"; ?> <?php
+    unset($_SESSION['pass_reset']);
+    } ?>
+
+    <?php if(!empty($_SESSION['error']))
+    {
+    echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
+    unset($_SESSION['error']);
+    } ?>
+    <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+      <div class="col-lg-3" id="reset_pass_div">
+      <h5> Reset user password </h5>
+    </div>
+    <div class="col-lg-8 passForm">
+      <form method="POST" action="resetPass.php">
+      <div class="search-box" style="max-width: 200px; display:inline;">
+          <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Search user" />
+          <button type="submit" class="btn desktop" style="margin-left: 20px;">Submit</button>
+          <div class="col-lg-1 result" style="display:inline;">
+      </div>
+      </div>
+      <button type="submit" class="btn mobile">Submit</button>
+
+
+    </form>
+    </div>
+  </div>
+
+  </div>
 </div>
 <?php }
 elseif ($_SESSION["isAdmin"] == true)
