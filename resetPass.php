@@ -9,7 +9,7 @@ if(isset($_POST['email_result'])) {
   echo $_POST['email_result'];
   $email = mysqli_real_escape_string($conn, ($_POST['email_result']));
 
-  if (mysqli_query($conn, "SELECT user WHERE Email='$email'"))
+  if (mysqli_query($conn, "SELECT * FROM user WHERE Email='$email'"))
   {
   if (mysqli_query($conn, "UPDATE user SET Password= md5(123456) WHERE Email='$email'"))
   {
