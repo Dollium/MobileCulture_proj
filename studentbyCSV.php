@@ -59,7 +59,7 @@ while ($data = fgetcsv($handle,1000, ";", '"' ))
         echo $thisStudentID.$_SESSION['schoolID'];
 
         $insertToStudent = mysqli_query($conn, "INSERT INTO student
-    (user_id,school_id) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."')");
+    (user_id,school_id, Starting_year) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."', '".$data[3]."')");
 //        echo   $insertToStudent;
 
     }
