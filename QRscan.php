@@ -2,9 +2,9 @@
 include 'config.php';
 session_start();
 ini_set('display_errors', 1);
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 $ID = $_SESSION['id'];
-// print_r($_SESSION);
+print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -78,12 +78,17 @@ $ID = $_SESSION['id'];
 	  			<p><video id="video" width="320" height="240" autoplay=true/></p>
 	  		</div>
 	  		 	  		
-	  		<p><button name="scan" onclick="load()" class="btn btn-primary" style="padding: 20px 20px;"> START SCANNING </button></p>	
-			<p><input onchange="handleFiles(this.files)" type="file" id="upload" class="btn btn-primary" style="padding: 20px 20px;"></p>	
-	  		
-	  		<div class="col-lg-12" style="text-align: center;">
-	  			<div id="result"></div>
-	  		</div>  
+	  		<p><button name="scan" onclick="load()" class="btn btn-primary" style="padding: 20px 20px;"> START SCANNING </button></p>
+			
+	  		<form action='QRscan.php' id="institution" method="POST">
+		  		<div class="col-lg-12" style="text-align: center;">
+		  			<div id="result"></div>
+		  			<p>
+						<button id="record" onclick="stop()" class="btn btn-primary" style="padding: 20px 20px;"> RECORD VISIT </button>
+					</p>
+		  		</div>  				
+        	</form>
+        	
 	  		
 			<canvas id="qr-canvas" width="800" height="600" style="display:none"></canvas>
 		

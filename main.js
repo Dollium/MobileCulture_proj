@@ -9,26 +9,6 @@ var webkit=false;
 var moz=false;
 var v=null;
 
-
-function handleFiles(f)
-{
-	var o=[];
-	
-	for(var i =0;i<f.length;i++)
-	{
-        var reader = new FileReader();
-        reader.onload = (function(theFile) {
-        return function(e) {
-            gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-
-			qrcode.decode(e.target.result);
-			console.log("File decoded");
-        };
-        })(f[i]);
-        reader.readAsDataURL(f[i]);	
-    }
-}
-
 function initCanvas(w,h)
 {
     gCanvas = document.getElementById("qr-canvas");
@@ -45,7 +25,6 @@ function captureToCanvas() {
     {
         try{
             gCtx.drawImage(v,0,0);
-            console.log("Success draw to canvas");
             try{
                 qrcode.decode();
             }
@@ -72,12 +51,19 @@ function read(a)
         html+="<a target='_blank' href='"+a+"'>"+a+"</a><br>";
     html+="<b>"+htmlEntities(a)+"</b><br><br>";
     document.getElementById("result").innerHTML=html;
+    console.log(a);
+    return (htmlEntities);
 }	
+
+function stop() {
+	console.log(qrcode.result);
+}
 
 function isCanvasSupported(){
   var elem = document.createElement('canvas');
   return !!(elem.getContext && elem.getContext('2d'));
 }
+
 function success(stream) {
     if(webkit)
         v.src = window.URL.createObjectURL(stream);
@@ -147,7 +133,7 @@ function setwebcam()
 	
 }
 
-function setwebcam2(options)
+function setwebcam2(options) //
 {
 	console.log(options);
 	document.getElementById("result").innerHTML="scanning";
@@ -164,7 +150,7 @@ function setwebcam2(options)
     if(n.webkitGetUserMedia)
     {
         webkit=true;
-        n.webkitGetUserMedia({video:options, audio: false}, success, error);
+        n.webkitGetUserMedia({video: options, audio: false}, success, error);
     }
     else
     if(n.mozGetUserMedia)
