@@ -3,7 +3,6 @@ include 'config.php';
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-$_SESSION['schoolID'] ='1';
 ?>
 <!DOCTYPE html>
 <html>
@@ -273,27 +272,32 @@ border-radius: 5px;
               <tr>
                   <td>
 
-                <label class="sr-only" for="name">Name</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name" required>
+                    <form action="studentToDTB.php" method="POST">
+
+                      <td>
+                      <label class="sr-only" for="name">Name</label>
+                      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name" required>
+                      </td>
+                      <td>
+                      <label class="sr-only" for="surName">Surname</label>
+                      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Surname" required>
+                      </td>
+                      <td>
+                      <label class="sr-only" for="year">Year</label>
+                      <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="year" name="year" placeholder="Starting year" required>
+                      </td>
+                      <td>
+                      <label class="sr-only" for="email">Email</label>
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon">@</div>
+                          <input type="text" class="form-control" id="email" name="email" placeholder="Useremail" required>
+                          </td>
+                      </div>
+                      <td>
+                      <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                      </td>
+                </form>
               </td>
-                <td>
-                <label class="sr-only" for="surName">Surname</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Surname" required>
-                </td>
-                <td>
-                <label class="sr-only" for="year">Year</label>
-                <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="year" name="year" placeholder="Starting year" required>
-                </td>
-                <td>
-                <label class="sr-only" for="email">Email</label>
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Useremail" required>
-                    </td>
-                </div>
-                <td>
-                <button type="submit" class="btn btn-primary" onclick="uploadManually()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                </td>
 
               </tr>
             </table>
@@ -320,7 +324,7 @@ border-radius: 5px;
               <div class="text-sm-center">
                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0 year" name="year" id="year" onchange="this.form.submit();">
                     <?php
-                    $query = "SELECT DISTINCT Starting_year FROM student ORDER BY Starting_year DESC";
+                    $query = "SELECT DISTINCT Starting_year FROM student WHERE school_id = '$sID' ORDER BY Starting_year DESC";
                     $result = mysqli_query($conn, $query);
                     echo "<option name='year' value=''> All </option>";
                     while($row = mysqli_fetch_array($result))
@@ -347,7 +351,11 @@ border-radius: 5px;
 </div>
               <div class="col-lg-6">
                 <form>
-                  <input type="text" name="search" id="textSearch" placeholder="Search" onkeyup="search()">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      <div class="input-group-addon search_icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                      <input type="text" name="search" id="textSearch" placeholder="Search" onkeyup="search()">
+                      </td>
+                  </div>
                 </form>
               </div>
 
@@ -429,6 +437,7 @@ border-radius: 5px;
 <?php }
 elseif($_SESSION["isAdmin"] == true)
 {
+  $_SESSION['schoolID'] ='1';
 ?>
 <div class="row">
 
