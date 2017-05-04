@@ -134,16 +134,22 @@ td, th {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="addSclAd.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addSclAd.php">
                                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add school admin
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="addstudent_resp.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add student user
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addInst.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.php">
                                 <i class="fa fa-code" aria-hidden="true"></i> Setting
                             </a>
                         </li>
