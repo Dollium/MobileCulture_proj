@@ -34,34 +34,47 @@ session_start();
 //get the csv file
 $file = $_FILES["studentFile"]["tmp_name"];
 $handle = fopen($file,"r");
-
+$i = 0;
+$f = 0;
+$t = 0;
+$arr = array();
+$arrf = array();
 //loop through the csv file and insert into database
 while ($data = fgetcsv($handle,1000, ";", '"' ))
     {
-    if ($data) {
-        $insertToUser = mysqli_query($conn, "INSERT INTO user
-    (Email,First_name, Last_name, Password, user_type_id ) VALUES ('".$data[0]."','".$data[1]."','".$data[2]."','".md5(123456)."'
-, 3)");
-////        echo $data[1];
-//        echo $data[0];
-//        echo $data[1];
-    }
+      if ($data && $data[0] != '' && $data[1] != '' && $data[2] != ''  && $data[3] != '') {
+          $insertToUser = mysqli_query($conn, "INSERT INTO user (Email,First_name, Last_name, Password, user_type_id ) VALUES ('".$data[0]."','".$data[1]."','".$data[2]."','".md5(123456)."', 3)");
+          $i++;
+          if(!$insertToUser){
+            $arr[] = $data['0'];
 
+            $t++;
+            $_SESSION['email_taken'] = "".$t ." emails already in database:</br>". implode("<br>",$arr) ."";
+            }
+            else {
+              $query = "SELECT user_id FROM user WHERE Email = '".$data[0]."'";
+              $result = mysqli_query($conn, $query);
+              while($row = mysqli_fetch_array($result))
+              {
+                  $thisStudentID = $row[0];
+                  echo $thisStudentID;
 
-        $query = "SELECT user_id FROM user WHERE Email = '".$data[0]."'";
-        $result = mysqli_query($conn, $query);
-        while($row = mysqli_fetch_array($result))
-        {
-            $thisStudentID = $row[0];
-            echo $thisStudentID;
+              }
+              echo $thisStudentID.$_SESSION['schoolID'];
+
+              $insertToStudent = mysqli_query($conn, "INSERT INTO student
+          (user_id,school_id, Starting_year) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."', '".$data[3]."')");
+      //        echo   $insertToStudent;
+        $_SESSION['success_registration'] = ''. $i .' users have successfully been registered';
+          }
 
         }
-        echo $thisStudentID.$_SESSION['schoolID'];
+        elseif ($data[0] == '' || $data[1] == '' || $data[2] == '' || $data[3] == '') {
+              $arrf[] = $data['0'];
+              $f++;
+              $_SESSION['error'] = 'Failed to register '. $f .' users:</br>'. implode("<br>",$arrf) .'';
+            }
 
-        $insertToStudent = mysqli_query($conn, "INSERT INTO student
-    (user_id,school_id, Starting_year) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."', '".$data[3]."')");
-//        echo   $insertToStudent;
-
-    }
-
+}
+header('location:addstudent_resp.php');
 //
