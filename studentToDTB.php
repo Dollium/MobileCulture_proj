@@ -9,18 +9,18 @@ include 'config.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
-if(isset($_POST['nameManually'])&& $_POST['surNameManually'] && $_POST['emailManually']){
+if(isset($_POST['name'])&& $_POST['surName'] && $_POST['email'] && $_POST['year']){
     var_dump($_POST);
     echo "School Id is ".$_SESSION['schoolID'];
     $insertToUser = mysqli_query($conn, "INSERT INTO user
-    (Email,First_name, Last_name, Password, user_type_id ) VALUES ('".$_POST['emailManually']."','".$_POST['nameManually']."','".$_POST['surNameManually']."','".md5(123456)."'
+    (Email,First_name, Last_name, Password, user_type_id ) VALUES ('".$_POST['email']."','".$_POST['name']."','".$_POST['surName']."','".md5(123456)."'
 , 3)");
     if(!$insertToUser){
           $_SESSION['email_taken'] = 'This email is already in the database.';
 
     }
     else {
-      $query = "SELECT user_id FROM user WHERE Email = '".$_POST['emailManually']."'";
+      $query = "SELECT user_id FROM user WHERE Email = '".$_POST['email']."'";
       $result = mysqli_query($conn, $query);
       while($row = mysqli_fetch_array($result))
       {
@@ -30,7 +30,7 @@ if(isset($_POST['nameManually'])&& $_POST['surNameManually'] && $_POST['emailMan
       echo $thisStudentID.$_SESSION['schoolID'];
 
       $insertToStudent = mysqli_query($conn, "INSERT INTO student
-      (user_id, school_id, Starting_year) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."', '". $_POST['yearManually'] ."')");
+      (user_id, school_id, Starting_year) VALUES ('".$thisStudentID."','".$_SESSION['schoolID']."', '". $_POST['year'] ."')");
       echo   $insertToStudent;
       $_SESSION['success_registration'] = 'The user has successfully been registered';
 
@@ -38,5 +38,6 @@ if(isset($_POST['nameManually'])&& $_POST['surNameManually'] && $_POST['emailMan
 
 }
 else {
-      $_SESSION['error'] = 'There was an error with youjr input. Please make sure all fields are filled out.';
+      $_SESSION['error'] = 'There was an error with your input. Please make sure all fields are filled out.';
 }
+header('location:addstudent_resp.php');
