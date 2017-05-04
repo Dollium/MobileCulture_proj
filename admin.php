@@ -76,24 +76,35 @@ error_reporting(E_ALL);
             <a class="navbar-brand" href="#">Admin Page</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="adminHomePage.php">
-                                <i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="school.php">
+                                <i class="fa fa-home" aria-hidden="true"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="addSclAd.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add school admin
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="addTeacher.html">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Teacher
+                            <a class="nav-link" href="addstudent_resp.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add student user
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="statistics.html">
+                            <a class="nav-link" href="addInst.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.php">
                                 <i class="fa fa-code" aria-hidden="true"></i> Setting
                             </a>
                         </li>
                     </ul>
                     <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                    </a>
+                </a>
                 </div>
             </nav>
             <br>
