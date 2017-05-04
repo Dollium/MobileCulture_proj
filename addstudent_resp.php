@@ -308,7 +308,7 @@ border-radius: 5px;
             <br>
             <!--UPLOAD CSV FILE -->
 
-            <form id="upload_csv" method="post" enctype="multipart/form-data">
+            <form action="studentbyCSV.php" method="post" enctype="multipart/form-data">
                  Or upload a csv file:
                 <input type="file" name="studentFile" id="csvStudentList" style="margin-top:15px;" />
                 <input type="submit" name="upload" id="upload" value="Upload" style="margin-top:10px;" class="btn btn-primary" />
@@ -579,7 +579,7 @@ elseif($_SESSION["isAdmin"] == true)
     <br>
     <!--UPLOAD CSV FILE -->
 
-    <form id="upload_csv" method="post" enctype="multipart/form-data">
+    <form action="studentbyCSV.php" method="post" enctype="multipart/form-data">
       <table class="register">
         <tr>
           <td>
@@ -730,45 +730,6 @@ elseif($_SESSION["isAdmin"] == true)
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
         <script>
-            function uploadManually() {
-                $.ajax({
-                    url: "studentToDTB.php",
-                    type: "post",
-                    dateType: "text",
-                    data: {
-                        nameManually: $('#name').val(),
-                        surNameManually: $('#surName').val(),
-                        yearManually: $('#year').val(),
-                        emailManually: $('#email').val()
-                    },
-                    success: function() {
-                      location.reload();
-                  },
-                })
-
-            }
-
-            $(document).ready(function(){
-                $('#upload_csv').on("submit", function(e){
-
-                    e.preventDefault(); //form will not submitted
-                    $.ajax({
-                        url:"studentbyCSV.php",
-                        method:"POST",
-                        data:new FormData(this),
-                        contentType:false,          // The content type used when sending data to the server.
-                        cache:false,                // To unable request pages to be cached
-                        processData:false,          // To send DOMDocument or non processed data file it is set to false
-                        success: function(data){
-
-                                alert(data)
-                            $('#csvStudentList').val("")
-
-                        }
-
-                    })
-                });
-            });
 
             $("#checkAll").click(function(){
                 $('input:checkbox').not(this).prop('checked', this.checked);
