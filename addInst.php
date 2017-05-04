@@ -48,8 +48,20 @@ td, th {
   border:0!important;
   max-width:100%;
 }
-
+.delete_button
+{
+  float:right;
+}
 @media only screen and (max-width: 760px){
+  .delete_button
+  {
+    display: none!important;
+  }
+  .checkbox
+  {
+    display:none!important;
+  }
+
 
   .form-inline
   {
@@ -93,11 +105,10 @@ td, th {
   width:100%;}
 
 	/* Labels on td*/
-	.user_log td:nth-of-type(1):before { content: "First Name"; }
-	.user_log td:nth-of-type(2):before { content: "Last Name"; }
+	.user_log td:nth-of-type(2):before { content: "Name"; }
 	.user_log td:nth-of-type(3):before { content: "Email"; }
-	.user_log td:nth-of-type(4):before { content: "School"; }
-  .user_log td:nth-of-type(5):before { content: "Remove"; }
+	.user_log td:nth-of-type(4):before { content: "Remove"; }
+
 
 }
     </style>
@@ -219,17 +230,6 @@ td, th {
           </div>
 
             <br>
-            <!--UPLOAD CSV FILE -->
-
-            <form id="upload_csv" method="post" enctype="multipart/form-data">
-                Or upload a csv file:
-                <input type="file" name="SchoolFile" id="csvSchoolList" style="margin-top:15px;" />
-                <input type="submit" name="upload" id="upload" value="Upload" style="margin-top:10px;" class="btn btn-primary" />
-
-            </form>
-
-            <!--//UPLOAD CSV FILE-->
-            <br>
         </div>
         <form action="Delete.php" method="post">
 
@@ -252,7 +252,7 @@ td, th {
 
           while($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-                            echo '<td><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
+                            echo '<td class="checkbox"><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
                             echo "<td>" . $row['Name'] . "</td>";
                             echo "<td>" . $row['Email'] . "</td>";
                             echo '<td><a href="delete.php?did='. $row['user_id'] .'" onclick="return deleteConfirm()" id="delete"><label for="delete"><i class="fa fa-times" aria-hidden="true"></i></label></a></td>';
@@ -278,24 +278,6 @@ td, th {
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
         <script>
-
-        $(document).ready(function(){
-            $('#upload_csv').on("submit", function(e){
-                e.preventDefault(); //form will not submitted
-                $.ajax({
-                    url:"schoolbyCSV.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
-                    method:"POST",
-                    data:new FormData(this),
-                    contentType:false,          // The content type used when sending data to the server.
-                    cache:false,                // To unable request pages to be cached
-                    processData:false,          // To send DOMDocument or non processed data file it is set to false
-                    success: function(data){
-                            alert(data)
-                            $('#csvSchoolList').val("")
-                    }
-                })
-            });
-        });
 
 
         $("#checkAll").click(function(){
