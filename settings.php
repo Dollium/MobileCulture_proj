@@ -383,40 +383,45 @@ elseif ($_SESSION["isSchool"] == true)
 {
 
   ?>
+
   <div class="row">
 
-      <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#">School Admin Page</a>
+    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">School Admin Page</a>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="school.php">
-                          <i class="fa fa-home" aria-hidden="true"></i> Home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="addstudent_resp.php">
-                          <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Student
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="settings.php">
-                          <i class="fa fa-code" aria-hidden="true"></i> Setting
-                      </a>
-                  </li>
-              </ul>
-              <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-          </a>
-          </div>
-      </nav>
-      <br>
-  <br>
-  <br>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="school.php">
+                      <i class="fa fa-home" aria-hidden="true"></i> Home
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="addstudent_resp.php">
+                      <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Student
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="settings.php">
+                      <i class="fa fa-code" aria-hidden="true"></i> Setting
+                  </a>
+              </li>
+          </ul>
+          <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
+      </a>
+      </div>
+    </nav>
+    <br>
+  </div>
 </div>
+
+<div class="col-md-12 col-sm-12 banner_image">
+
+</div>
+<div class="centered bordered container" style="background-color:#EDEDED;">
 <div class="row">
   <div class="main">
     <h2> Settings </h2>
@@ -441,7 +446,7 @@ elseif ($_SESSION["isSchool"] == true)
     echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
     unset($_SESSION['error']);
     } ?>
-    <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+    <div class="wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
       <div class="col-lg-3" id="reset_pass_div">
       <h5> Reset user password </h5>
     </div>
@@ -502,6 +507,11 @@ elseif ($_SESSION["isAdmin"] == true)
   <br>
   <br>
 </div>
+</div>
+<div class="col-md-12 col-sm-12 banner_image">
+
+</div>
+<div class="centered bordered container" style="background-color:#EDEDED;">
 <div class="row">
   <div class="main">
     <h2> Settings </h2>
@@ -554,7 +564,11 @@ elseif ($_SESSION["isAdmin"] == true)
 
 
       <div class="pass wrapper" style="margin: 0 15px 0 15px;">
-
+        <?php if(!empty($_SESSION['pass_success']))
+        {
+        echo "<br><div class='alert success'>".$_SESSION['pass_success']."</div>"; ?> <?php
+        unset($_SESSION['pass_success']);
+        } ?>
         <div class="col-lg-3" id="pass_change_div">
         <h5> Change your password </h5>
       </div>
@@ -563,37 +577,33 @@ elseif ($_SESSION["isAdmin"] == true)
 
               <label for="InputPassword2">Old Password</label>
               <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
-              <?php if(!empty($_SESSION['Oldpass']))
-              {
-              ?>
-              <div class="alert danger">
-              <?php
-              echo $_SESSION['Oldpass']; ?></div> <?php
-              unset($_SESSION['Oldpass']);
-              } ?>
+
+                <?php if(!empty($_SESSION['Oldpass']))
+                {
+                echo "<div class='alert danger'>".$_SESSION['Oldpass']."</div>"; ?> <?php
+                unset($_SESSION['Oldpass']);
+                } ?>
+
               <br/>
               <label for="InputPassword2">New Password</label>
               <input type="password" class="form-control" id="InputPassword2" placeholder="New Password" name="newPassword" required>
+
               <?php if(!empty($_SESSION['passLen']))
               {
-              ?>
-              <div class="alert danger">  <?php
-                echo $_SESSION['passLen']; ?></div>
-             <?php
+              echo "<div class='alert success'>".$_SESSION['passLen']."</div>"; ?> <?php
               unset($_SESSION['passLen']);
               } ?>
+
               <br/>
               <label for="InputPassword3">Confirm New Password</label>
               <input type="password" class="form-control" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required> <br/>
 
               <?php if(!empty($_SESSION['passMatch']))
               {
-              ?>
-              <div class="alert danger"><?php
-              echo $_SESSION['passMatch']; ?></div>
-               <?php
+              echo "<div class='alert danger'>".$_SESSION['passMatch']."</div>"; ?> <?php
               unset($_SESSION['passMatch']);
               } ?>
+
               <label for=""></label><button class="btn" type="submit" value="send">Change it</button>
 
 
