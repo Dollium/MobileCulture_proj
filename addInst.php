@@ -167,6 +167,7 @@ td, th {
         <div class="addSchool">
           <div class="row">
             <div class="form-inline">
+              <!-- successes and errors for registration -->
               <?php if(!empty($_SESSION['success_registration']))
               {
               ?>
@@ -192,6 +193,18 @@ td, th {
               echo $_SESSION['error']; ?> <?php
               unset($_SESSION['error']);
               } ?>
+
+              <!-- successes and errors for deletion -->
+                <?php if(!empty($_SESSION['delete_success']))
+                {
+                echo "<div class='alert success'>".$_SESSION['delete_success']."</div>"; ?> <?php
+                unset($_SESSION['delete_success']);
+                } ?>
+                <?php if(!empty($_SESSION['delete_unsuccess']))
+                {
+                echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
+                unset($_SESSION['delete_unsuccess']);
+                } ?>
 
             <table class="register">
               <tr>
