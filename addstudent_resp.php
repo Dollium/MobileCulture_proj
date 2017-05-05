@@ -9,12 +9,26 @@ error_reporting(E_ALL);
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
 
+    .alert
+    {
+      margin-bottom: 0!important;
 
+    }
+    .danger
+    {
+      border: 1px solid #d33f3f;
+      background-color: rgba(247, 70, 70, 0.68);
+    }
+    .success
+    {
+      border: 1px solid #b4d6b4;
+    background-color: #c2f1c2;
+    }
     input#textSearch {
         width: 230px;
         box-sizing: border-box;
@@ -487,31 +501,36 @@ elseif($_SESSION["isAdmin"] == true)
 <br>
 
 <div class="addStudent">
+
+  <!-- successes and errors for registration -->
   <?php if(!empty($_SESSION['success_registration']))
   {
-  ?>
-  <div class="alert danger"></div>
-  <?php
-  echo $_SESSION['success_registration']; ?> <?php
+  echo "<div class='alert success'>".$_SESSION['success_registration']."</div>"; ?> <?php
   unset($_SESSION['success_registration']);
   } ?>
   <?php if(!empty($_SESSION['email_taken']))
   {
-  ?>
-  <div class="alert danger"></div>
-  <?php
-  echo $_SESSION['email_taken']; ?> <?php
+  echo "<div class='alert danger'>".$_SESSION['email_taken']."</div>"; ?> <?php
   unset($_SESSION['email_taken']);
   } ?>
-
   <?php if(!empty($_SESSION['error']))
   {
-  ?>
-  <div class="alert danger"></div>
-  <?php
-  echo $_SESSION['error']; ?> <?php
+  echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
   unset($_SESSION['error']);
   } ?>
+
+<!-- successes and errors for deletion -->
+  <?php if(!empty($_SESSION['delete_success']))
+  {
+  echo "<div class='alert success'>".$_SESSION['delete_success']."</div>"; ?> <?php
+  unset($_SESSION['delete_success']);
+  } ?>
+  <?php if(!empty($_SESSION['delete_unsuccess']))
+  {
+  echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
+  unset($_SESSION['delete_unsuccess']);
+  } ?>
+
 
     <div class="form-inline">
       <form method="post" style="padding: 6px;margin-bottom:40px;">
