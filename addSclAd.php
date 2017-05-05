@@ -14,6 +14,9 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
+    .alert{
+      width:100%;
+    }
 
 .form-inline .form-control {
 display: table-cell!important;
@@ -48,9 +51,30 @@ td, th {
   border:0!important;
   max-width:100%;
 }
+.alert
+{
+  margin-bottom: 0!important;
 
+}
+.danger
+{
+  border: 1px solid #d33f3f;
+  background-color: rgba(247, 70, 70, 0.68);
+}
+.success
+{
+  border: 1px solid #b4d6b4;
+background-color: #c2f1c2;
+}
+.delete_button
+{
+  float:right;
+}
 @media only screen and (max-width: 760px){
-
+  .delete_button, .checkbox
+  {
+    display:none!important;
+  }
   .form-inline
   {
     width:100%;
@@ -93,11 +117,11 @@ td, th {
   width:100%;}
 
 	/* Labels on td*/
-	.user_log td:nth-of-type(1):before { content: "First Name"; }
-	.user_log td:nth-of-type(2):before { content: "Last Name"; }
-	.user_log td:nth-of-type(3):before { content: "Email"; }
-	.user_log td:nth-of-type(4):before { content: "School"; }
-  .user_log td:nth-of-type(5):before { content: "Remove"; }
+	.user_log td:nth-of-type(2):before { content: "First Name"; }
+	.user_log td:nth-of-type(3):before { content: "Last Name"; }
+	.user_log td:nth-of-type(4):before { content: "Email"; }
+	.user_log td:nth-of-type(5):before { content: "School"; }
+  .user_log td:nth-of-type(6):before { content: "Remove"; }
 
 }
     </style>
@@ -144,38 +168,42 @@ td, th {
 
         <div class="addSchool">
           <div class="row">
+            <div>
             <div class="form-inline">
+              <!-- successes and errors for registration -->
               <?php if(!empty($_SESSION['success_registration']))
               {
-              ?>
-              <div class="alert danger"></div>
-              <?php
-              echo $_SESSION['success_registration']; ?> <?php
+              echo "<div class='alert success'>".$_SESSION['success_registration']."</div>"; ?> <?php
               unset($_SESSION['success_registration']);
               } ?>
               <?php if(!empty($_SESSION['email_taken']))
               {
-              ?>
-              <div class="alert danger"></div>
-              <?php
-              echo $_SESSION['email_taken']; ?> <?php
+              echo "<div class='alert danger'>".$_SESSION['email_taken']."</div>"; ?> <?php
               unset($_SESSION['email_taken']);
               } ?>
 
               <?php if(!empty($_SESSION['error']))
               {
-              ?>
-              <div class="alert danger"></div>
-              <?php
-              echo $_SESSION['error']; ?> <?php
+              echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
               unset($_SESSION['error']);
               } ?>
+
+              <!-- successes and errors for deletion -->
+                <?php if(!empty($_SESSION['delete_success']))
+                {
+                echo "<div class='alert success'>".$_SESSION['delete_success']."</div>"; ?> <?php
+                unset($_SESSION['delete_success']);
+                } ?>
+                <?php if(!empty($_SESSION['delete_unsuccess']))
+                {
+                echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
+                unset($_SESSION['delete_unsuccess']);
+                } ?>
             <table class="register">
               <tr>
-		       <form action="schoolToDTB.php" method="POST" style="margin:auto;">
                 <td>
 
-                 
+                  <form action="schoolToDTB.php" method="POST" style="margin:auto;">
                   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="schoolID" id="schoolID">
                       <?php
                       $query = "SELECT school_id, Name FROM school";
@@ -192,17 +220,9 @@ td, th {
                                 $_SESSION['schoolID'] = mysqli_real_escape_string($conn, ($_POST['schoolID']));
 
                               }
-
-
-
                               ?>
-
                 </select>
-
-
-
-
-            </td>
+              </td>
 
                   <td>
                 <label class="sr-only" for="name">Name</label>
@@ -217,9 +237,8 @@ td, th {
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon">@</div>
                     <input type="text" class="form-control" id="email" name="email" placeholder="Useremail">
-                    
+                    </td>
                 </div>
-			</td>
                 <td>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
                 </td>
@@ -234,7 +253,7 @@ td, th {
             <br>
             <!--UPLOAD CSV FILE -->
 
-            <form id="upload_csv" method="post" enctype="multipart/form-data">
+            <form id="upload_csv" action="schoolbyCSV.php" method="post" enctype="multipart/form-data">
                 Or upload a csv file:
                 <input type="file" name="SchoolFile" id="csvSchoolList" style="margin-top:15px;" />
                 <input type="submit" name="upload" id="upload" value="Upload" style="margin-top:10px;" class="btn btn-primary" />
@@ -266,7 +285,7 @@ td, th {
 
           while($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-                            echo '<td><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
+                            echo '<td class="checkbox"><input type="checkbox" name="box[]" value='. $row['user_id'] .'></td>';
                             echo "<td>" . $row['First_name'] . "</td>";
                             echo "<td>" . $row['Last_name'] . "</td>";
                             echo "<td>" . $row['Email'] . "</td>";
@@ -291,58 +310,15 @@ td, th {
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
         <script>
-        function uploadManually() {
-            $.ajax({
-                url: "schoolToDTB.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
-                type: "post",
-                dateType: "text",
-                data: {
-                    schoolManually: $('#school').val(),
-                    nameManually: $('#name').val(),
-                    surNameManually: $('#surName').val(),
-                    emailManually: $('#email').val()
-                },
-                success: function (result) {
-                    alert(result),
-                        $('#name').val(""),
-                        $('#surName').val(""),
-                        $('#email').val("")
-                }
-            })
-        }
-        $(document).ready(function(){
-            $('#upload_csv').on("submit", function(e){
-                e.preventDefault(); //form will not submitted
-                $.ajax({
-                    url:"schoolbyCSV.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
-                    method:"POST",
-                    data:new FormData(this),
-                    contentType:false,          // The content type used when sending data to the server.
-                    cache:false,                // To unable request pages to be cached
-                    processData:false,          // To send DOMDocument or non processed data file it is set to false
-                    success: function(data){
-                            alert(data)
-                            $('#csvSchoolList').val("")
-                    }
-                })
-            });
-        });
+
+
 
         $("#checkAll").click(function(){
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
 
         function deleteConfirm(){
-            var result = confirm("Are you sure to delete users?");
-            if(result){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        function deleteConfirm(){
-            var result = confirm("Are you sure to delete users?");
+            var result = confirm("Are you sure you want to delete users?");
             if(result){
                 return true;
             }else{
