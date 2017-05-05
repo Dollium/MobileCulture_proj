@@ -44,8 +44,29 @@ elseif($_POST["dltBox"]) {
         $delSql = implode(",", $delIds);
 
         // Delete users
-        mysqli_query($conn, "DELETE FROM user WHERE user_id IN ($delSql)");
+        $sql = mysqli_query($conn, "DELETE FROM user WHERE user_id IN ($delSql)");
         echo "Deletion successful!";
+        if($sql)
+        {
+
+
+            $sql = mysqli_query($conn, "DELETE FROM student WHERE user_id IN ($delSql)");
+
+
+            if($sql2)
+            {
+
+              $sql = mysqli_query($conn, "DELETE FROM student_visits WHERE user_id IN ($delSql)");
+              echo "<br/><br/><span>deleted successfully...!!</span>";
+
+            }
+            else {
+                echo "no, HERE";
+              }
+          }
+          else {
+              echo "ERROR HERE";
+            }
       }
 }
 
