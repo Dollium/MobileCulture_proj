@@ -11,8 +11,15 @@ echo strlen($_POST['newPassword']);
  if(strlen($_POST['newPassword']) < '8')
  {
    $_SESSION['passLen'] = "Password must be at least 8 characters long.";
+   if(($_SESSION['isAdmin'] == true) || ($_SESSION['isSchool'] == true) || ($_SESSION['isStudent']== true))
+   {
+         header('location:settings.php');
+         exit;
+       }
+ else {
    header('location:newPassword.php');
    exit;
+ }
  }
  else if (strlen($_POST['newPassword']) >= '8') {
 
@@ -21,13 +28,22 @@ echo strlen($_POST['newPassword']);
       if ($password1 <> $password2)
       {
            $_SESSION['passMatch'] = "Your passwords do not match";
+
+           if(($_SESSION['isAdmin'] == true) || ($_SESSION['isSchool'] == true) || ($_SESSION['isStudent']== true))
+           {
+
+                 header('location:settings.php');
+                 exit;
+               }
+         else {
            header('location:newPassword.php');
            exit;
+         }
       }
 
       else if (mysqli_query($conn, "UPDATE user SET Password='$password1' WHERE Email='$username'"))
       {
-          echo "You have successfully changed your password.";
+          $_SESSION['pass_success'] = "You have successfully changed your password.";
           $_SESSION['password'] = $password1;
       }
       else
@@ -37,10 +53,23 @@ echo strlen($_POST['newPassword']);
     }
   else {
     $_SESSION['Oldpass'] = "Password incorrect";
+    if(($_SESSION['isAdmin'] == true) || ($_SESSION['isSchool'] == true) || ($_SESSION['isStudent']== true))
+    {
+          header('location:settings.php');
+          exit;
+        }
+  else {
     header('location:newPassword.php');
     exit;
   }
+  }
 mysqli_close($conn);
+if(($_SESSION['isAdmin'] == true) || ($_SESSION['isSchool'] == true) || ($_SESSION['isStudent']== true))
+{
+      header('location:settings.php');
+    }
+else {
 header('location:index.php');
+}
 }
 ?>
