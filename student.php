@@ -116,7 +116,7 @@ height: 470px; text-align:center;
       {
         padding: 4px;
         padding-left: 20px;
-       
+        bor
       }
     .min_visits td:nth-child(n) {
       border-right: 1px solid #666B85;
@@ -382,8 +382,8 @@ if($_SESSION["isStudent"] == true)
 
   <div class="row">
 
-    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered ">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary offcanvas centered ">
+      <button class="navbar-toggler navbar-toggler-right" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">Student page</a>
