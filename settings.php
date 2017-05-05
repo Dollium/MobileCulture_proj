@@ -30,6 +30,10 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-image: url("talvi-4.jpg");
+    }
     .alert
     {
       margin-bottom: 0!important;
@@ -175,13 +179,27 @@ $row = $result->fetch_assoc();
       padding-left:12px;
 
     }
+    .banner_image
+    {
+      display:none;
+    }
     @media screen and (max-width: 992px)
     {
       .container
       {
         width:100%!important;
       }
+      .banner_image
+      {
 
+        display: block;
+        background-image: url("talvi-4.jpg");
+        height: 200px;
+        background-size: cover;
+
+      background-repeat: no-repeat;
+
+      }
       .crop img
       {
         margin: 30px 20px 30px 0;
@@ -278,7 +296,7 @@ $row = $result->fetch_assoc();
 
 if($_SESSION["isStudent"] == true)
 {
-  $sql = "SELECT * FROM user AS us LEFT JOIN student AS stu ON stu.user_id = us.user_id LEFT JOIN class AS cl ON stu.class_id = cl.class_id LEFT JOIN school AS scl ON stu.school_id = scl.school_id WHERE Email='$username'";
+  $sql = "SELECT * FROM user AS us LEFT JOIN student AS stu ON stu.user_id = us.user_id LEFT JOIN school AS scl ON stu.school_id = scl.school_id WHERE Email='$username'";
   $result= mysqli_query($conn,$sql);
   $row = $result->fetch_assoc();
 ?>
@@ -320,6 +338,9 @@ if($_SESSION["isStudent"] == true)
     <br>
   </div>
 </div>
+<div class="col-md-12 col-sm-12 banner_image">
+
+</div>
 
 <div class="centered bordered container" style="background-color:#EDEDED;">
   <div class="row">
@@ -330,7 +351,7 @@ if($_SESSION["isStudent"] == true)
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+      <div class="photo_wrapper_thumb" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
         <div class="col-lg-3" style="display:inline-block;">
         <h5> Profile picture </h5>
       </div>
@@ -341,7 +362,7 @@ if($_SESSION["isStudent"] == true)
           $sql = "SELECT * FROM user WHERE Email='$username'";
           $sth = $conn->query($sql);
           $result=mysqli_fetch_array($sth);
-          echo '<img class="profile_photo" src="data:image/jpeg;base64,'.base64_encode( $result['Profile_photo'] ).'" />';
+          echo '<img class="profile_photo_thumb" src="data:image/jpeg;base64,'.base64_encode( $result['Profile_photo'] ).'" />';
           ?>
           </div>
           <form method="POST" action="photoUpload.php" class="upload_form" enctype="multipart/form-data">
@@ -354,7 +375,7 @@ if($_SESSION["isStudent"] == true)
 
       </div>
     </div>
-    </div>
+
 
 
 <?php }
