@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 session_start();
 $ID = mysqli_real_escape_string($conn, ($_POST['schoolID']));
 
-if(isset($_POST['name'])&& $_POST['surname'] && $_POST['email']){
+if(isset($_POST['name']) && $_POST['surname'] && $_POST['email'] && $_POST['name'] != '' && $_POST['surname'] != '' && $_POST['email'] != ''){
     var_dump($_POST);
     echo "School Id is ".$ID;
     $insertToUser = mysqli_query($conn, "INSERT INTO user
