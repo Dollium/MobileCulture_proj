@@ -36,6 +36,8 @@ if(isset($_GET['did']))
     // Deletion through checkboxes
 elseif($_POST["dltBox"]) {
     // Loop through each selection
+    if(isset($_POST['box']))
+    {
       foreach($_REQUEST['box'] as $val)
       {
 
@@ -63,9 +65,9 @@ elseif($_POST["dltBox"]) {
               $_SESSION['delete_unsuccess'] = "Poisto epäonnistui.";
             }
       }
-}
-
-else {
-  echo "ERROR";
+    }
+    else {
+      $_SESSION['no_delete'] = "Poisto epäonnistui. Ei valittuja käyttäjiä.";
+    }
 }
 header('Location: ' . $_SERVER['HTTP_REFERER']);
