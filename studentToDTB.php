@@ -9,7 +9,7 @@ include 'config.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
-if(isset($_POST['name'])&& $_POST['surName'] && $_POST['email'] && $_POST['year']){
+if(isset($_POST['name'])&& $_POST['surName'] && $_POST['email'] && $_POST['year']  && $_POST['name'] != '' && $_POST['surName'] != '' && $_POST['email'] != '' && $_POST['year'] != ''){
     var_dump($_POST);
     echo "School Id is ".$_SESSION['schoolID'];
     $insertToUser = mysqli_query($conn, "INSERT INTO user
