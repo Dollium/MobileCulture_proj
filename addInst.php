@@ -205,6 +205,11 @@ td, th {
                 echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
                 unset($_SESSION['delete_unsuccess']);
                 } ?>
+                <?php if(!empty($_SESSION['no_delete']))
+                {
+                echo "<div class='alert danger'>".$_SESSION['no_delete']."</div>"; ?> <?php
+                unset($_SESSION['no_delete']);
+                } ?>
 
             <table class="register">
               <tr>
