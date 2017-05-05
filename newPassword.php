@@ -76,10 +76,7 @@
           <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
           <?php if(!empty($_SESSION['Oldpass']))
           {
-          ?>
-          <div class="alert danger">
-          <?php
-          echo $_SESSION['Oldpass']; ?></div> <?php
+          echo "<div class='alert danger'>".$_SESSION['Oldpass']."</div>"; ?> <?php
           unset($_SESSION['Oldpass']);
           } ?>
           <br/>
@@ -87,33 +84,27 @@
           <input type="password" class="form-control" id="InputPassword2" placeholder="New Password" name="newPassword" required>
           <?php if(!empty($_SESSION['passLen']))
           {
-          ?>
-          <div class="alert danger">  <?php
-            echo $_SESSION['passLen']; ?></div>
-         <?php
+          echo "<div class='alert danger'>".$_SESSION['passLen']."</div>"; ?> <?php
           unset($_SESSION['passLen']);
           } ?>
           <br/>
           <label for="InputPassword3">Confirm New Password</label>
-          <input type="password" class="form-control" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required> <br/> </div>
+          <input type="password" class="form-control" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required> <br/>
 
           <?php if(!empty($_SESSION['passMatch']))
           {
-          ?>
-          <div class="alert danger"><?php
-          echo $_SESSION['passMatch']; ?></div>
-           <?php
+          echo "<div class='alert danger'>".$_SESSION['passMatch']."</div>"; ?> <?php
           unset($_SESSION['passMatch']);
-          } ?>
+          } ?> </div>
 
 
 
 
           <button class="btn" type="submit" value="send">Change it</button>
-        </div>
+      
       </form>
     </div>
-    </center>
+
 
 
       <!-- jQuery first, then bootstrap js -->
@@ -123,7 +114,6 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
       <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
-  </div>
 
 </body>
 
