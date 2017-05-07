@@ -31,19 +31,37 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
     <style>
+    .alert
+    {
+      margin-bottom: 0!important;
 
-.photo_container
-{
-  height:400px;
-  margin-top: 70px;
-  margin-left:auto;
-  margin-right:auto;
-}
+    }
+    .danger
+    {
+      border: 1px solid #d33f3f;
+      background-color: rgba(247, 70, 70, 0.68);
+    }
+    .success
+    {
+      border: 1px solid #b4d6b4;
+    background-color: #c2f1c2;
+    }
+    .mobile{
+      display:none;
+    }
+    .photo_container
+    {
+      height:400px;
+      margin-top: 70px;
+      margin-left:auto;
+      margin-right:auto;
+    }
 
-.photo.wrapper
-{
-height: 470px; text-align:center;
-}
+    .photo.wrapper
+    {
+    height: 470px;
+    text-align:center;
+    }
     .inputfile {
     	width: 0.1px;
     	height: 0.1px;
@@ -209,6 +227,13 @@ height: 470px; text-align:center;
 
 
         @media screen and (max-width: 992px) {
+          .desktop{
+            display:none;
+          }
+          .mobile{
+            display:block;
+          }
+
           label:hover, label:active, .inputfile:hover+label, .inputfile:active+label {
               color: #0275d8;
               background-color: transparent;
@@ -416,15 +441,39 @@ if($_SESSION["isStudent"] == true)
     </nav>
     <br>
   </div>
+
 </div>
+<?php if(!empty($_SESSION['photo_fail_mobi']))
+{
+echo "<div style='background-color: white'><div class='alert danger mobile'>".$_SESSION['photo_fail_mobi']."</div></div>"; ?> <?php
+unset($_SESSION['photo_fail_mobi']);
+} ?>
+<?php if(!empty($_SESSION['size_large_mobi']))
+{
+echo "<div style='background-color: white'><div class='alert danger mobile'>".$_SESSION['size_large_mobi']."</div></div>"; ?> <?php
+unset($_SESSION['size_large_mobi']);
+} ?>
+
 <div class="col-md-12 col-sm-12 banner_image">
 
 </div>
+
 <div class="centered bordered container" style="background-color:#EDEDED;">
+  <?php if(!empty($_SESSION['photo_fail']))
+  {
+  echo "<div class='alert danger desktop'>".$_SESSION['photo_fail']."</div>"; ?> <?php
+  unset($_SESSION['photo_fail']);
+  } ?>
+  <?php if(!empty($_SESSION['size_large']))
+  {
+  echo "<div style='background-color: white'><div class='alert danger desktop'>".$_SESSION['size_large']."</div></div>"; ?>
+  <?php
+  unset($_SESSION['size_large']);
+  } ?>
   <div class="row" id="imgAndDetail">
 
-    <div class="col-lg-4 photo wrapper" style="">
-      <div class="col-lg-12 photo_container" style="">
+    <div class="col-lg-4 photo wrapper">
+      <div class="col-lg-12 photo_container">
 
         <!-- Photo from database -->
         <?php
