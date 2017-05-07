@@ -13,11 +13,11 @@ error_reporting(E_ALL);
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    .columnchart_material {
+    #chart {
         width: 100%;
         min-height: 450px;
       }
-      .stacked_chart
+      #smallerChart
       {
         width: 100%;
         min-height: 200px;
@@ -32,20 +32,23 @@ error_reporting(E_ALL);
         margin-right:0!important;
         margin-left:0!important;
       }
+      #startDate, #endDate{
+          border: 1px solid darkgray;
+      }
 
         @media screen and (min-width: 992px) {
-            #columnchart_material{
+            #chart{
                 display: flex;
             }
-            div#stacked_chart{
+            div#smallerChart{
                 display: none;
             }
         }
         @media screen and (max-width: 992px) {
-            #columnchart_material{
+            #chart{
                 display: none;
             }
-            #stacked_chart{
+            #smallerChart{
                 display: flex;
             }
             .container-fluid
@@ -113,30 +116,37 @@ error_reporting(E_ALL);
         <br>
         <div class="row" style="max-width:100%;">
           <div class="col-sm-12">
-          <form>
+<!--          <form>-->
 
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Show statistics by</label>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                  <option value="school" selected>School</option>
-                  <option value="institution">Institution</option>
-                  <option value="Timespan">Timespan</option>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="filterBy">
+                  <option selected>School</option>
+                  <option >Institution</option>
               </select>
                 <br>
                 <br>
-                <input type="text" name="startDate" id="startDate"> <input type="text" name="endDate" id="endDate">
-                <button type="submit" class="btn btn-primary">Get the statistics</button>
+                <input type="text" name="startDate" id="startDate">
+                <input type="text" name="endDate" id="endDate">
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" id="getStatistic">Get the statistics</button>
 
-            </form>
+<!--            </form>-->
           </div>
               <div class="col-sm-12">
             <br>
-                <center>
-                    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
 
-                </center>
-                <div id="stacked_chart" style="width:100%; height:300px">
-
+                <div id="chart">
+<!--                    <div id="columnchart_material" style="width: 900px; height: 500px;">-->
+<!---->
+<!--                    </div>-->
+<!--                    <div id="stacked_chart" style="width:100%; height:300px">-->
+<!---->
+<!--                    </div>-->
                 </div>
+                  <div id="smallerChart">
+
+                  </div>
 
 
         </div>
@@ -159,9 +169,9 @@ error_reporting(E_ALL);
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function(event) {
-                $.getJSON("chart.php", function(result){
+                $.getJSON("chartSchool.php", function(result){
                     window.schoolVisit = result;
-
+//                    FORMAT THE DATA TYPE FOR THE CHART
                     var institution_ids = ["name","1", "2", "3", "4"]
                     window.chartData = schoolVisit.map(function(row) {
                         if (row === schoolVisit[0]) {
@@ -172,54 +182,68 @@ error_reporting(E_ALL);
                             var result = row.find(function(col) {
                                 return col.institution_id === id
                             })
-                            return result ? Number(result.visit_number) : 0
+                            return result ? Number(result.visit_number) : 0;
                         })
                     });
-                    console.log(chartData);
+                });
+//                    GET INSTITUTION CHART DATA BY DEFALT
+                    $.getJSON("chartInsti.php", function(result){
+                        window.institutionVisit = result;
+                        institutionVisit = institutionVisit.map(function (row) {
+                            if (row === institutionVisit[0]) {
+                                return row;
+                            }
+                            return row.map(function (value, index) {
+                                if(index===1)   {
+                                    return  Number(value);
+                                }
+                                return value;
+                            })
+                        })
+                        institutionVisit[0].push({ role: "style" });
+                        institutionVisit[1].push("#4DD0E1");
+                        institutionVisit[2].push("#AED581");
+                        institutionVisit[3].push("#FFD54F");
+                        institutionVisit[4].push("#A1887F");
+                    });
 
                 });
+//            DEFAUTL CHART FOR SCHOOL
                 google.charts.load('current', {
                     'packages': ['bar','corechart']
                 });
-                google.charts.setOnLoadCallback(drawChart);
+                google.charts.setOnLoadCallback(drawSchoolChart);
 
-                function drawChart() {
+                function drawSchoolChart() {
                     var data = google.visualization.arrayToDataTable(window.chartData);
 
                     var options = {
                         chart: {
                             title: 'Student visits record',
-                            subtitle: 'Timespan: 16/9/2017-16/03/2017',
+                            subtitle: 'Timespan: 6 months',
                         }
                     };
 
-                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+//                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                    var chart = new google.charts.Bar(document.getElementById('chart'));
+
 
                     chart.draw(data, options);
                 }
 
-                //DRAW STACKED CHART
+                //DRAW SCHOOL SMALL CHART
 
-                google.charts.setOnLoadCallback(drawStackedChart);
+                google.charts.setOnLoadCallback(drawSchoolSmallChart);
 
                 // Callback that creates and populates a data table,
                 // instantiates the pie chart, passes in the data and
                 // draws it.
-                function drawStackedChart() {
+                function drawSchoolSmallChart() {
                     console.log(chartData);
                     // Create the data table.
-                    var data = google.visualization.arrayToDataTable(chartData
-    //                    [
-    //                    ['School', 'Museumm', 'Cinemammmmmmmm', 'City Symphonyyyy', 'City Theateraaaaaa'],
-    //                    ['School1', 1000, 400, 200, 247],
-    //                    ['School2', 1170, 460, 250, 240],
-    //                    ['School3', 660, 1120, 300, 230]
-    //                ]
-                    );
+                    var data = google.visualization.arrayToDataTable(chartData);
 
                     var options = {
-    //                width: 900,
-    //                height: 1900,
                         legend: {
                             position: 'top',
                             maxLines: 4
@@ -232,19 +256,251 @@ error_reporting(E_ALL);
                     };
 
                     // Instantiate and draw our chart, passing in some options.
-                    var chart = new google.visualization.BarChart(document.getElementById('stacked_chart'));
+                    var chart = new google.visualization.BarChart(document.getElementById('smallerChart'));
                     chart.draw(data, options);
                 }
-            });
+
+
+//              DRAW CHART TO USE FILTER
+                $('#getStatistic').click(function() {
+
+//               CHECK IF DRAW CHART BY DEFAULT 6 MONTHS
+                    if($('#filterBy').val()=== "Institution"
+                        && $('#startDate').val() ===''
+                        && $('#endDate').val()==='') {
+
+                            google.charts.setOnLoadCallback(drawInstiChart);
+                        function drawInstiChart() {
+                            var data = google.visualization.arrayToDataTable(institutionVisit);
+//                            console.log('institution visit', institutionVisit);
+                            var view = new google.visualization.DataView(data);
+                            view.setColumns([0, 1,
+                                { calc: "stringify",
+                                    sourceColumn: 1,
+                                    type: "string",
+                                    role: "annotation" },
+                                2]);
+
+                            var options = {
+                                title: "Institution visit for 6 months",
+                                width: 700,
+                                height: 400,
+                                bar: {groupWidth: "95%"},
+                                legend: { position: "none" },
+                            };
+                            var chart = new google.visualization.ColumnChart(document.getElementById("chart"));
+                            chart.draw(view, options);
+                        }
+//                        DRAW INSTITUTION SMALL CHART
+                        google.charts.setOnLoadCallback(drawInstiSmallChart);
+                        function drawInstiSmallChart() {
+                            var data = google.visualization.arrayToDataTable(institutionVisit);
+//                            console.log('institution visit', institutionVisit);
+                            var view = new google.visualization.DataView(data);
+                            view.setColumns([0, 1,
+                                { calc: "stringify",
+                                    sourceColumn: 1,
+                                    type: "string",
+                                    role: "annotation" },
+                                2]);
+
+                            var options = {
+                                title: "Institution visit for 6 months",
+                                width: 300,
+                                height: 350,
+                                bar: {groupWidth: "95%"},
+                                legend: { position: "none" },
+                            };
+                            var chart = new google.visualization.ColumnChart(document.getElementById("smallerChart"));
+                            chart.draw(view, options);
+                        }
+                    }
+//                    CHECK IF THE CHART IS FILTER BY TIME
+                    else if($('#filterBy').val()=== "Institution"
+                        && $('#startDate').val()!==''
+                        && $('#endDate').val()!=='') {
+
+                        $.ajax({
+                            url: "chartInstiByTime.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
+                            type: "post",
+                            dateType: "text",
+                            data: {
+                                startDate: $('#startDate').val() + ' 00:00:00',
+                                endDate: $('#endDate').val() + ' 00:00:00'
+                            },
+                            success: function (result) {
+                                window.institutionVisitByTime = JSON.parse(result);
+                                console.log(institutionVisitByTime);
+                                institutionVisitByTime = institutionVisitByTime.map(function (row) {
+                                    if (row === institutionVisitByTime[0]) {
+                                        return row;
+                                    }
+                                    return row.map(function (value, index) {
+                                        if (index === 1) {
+                                            if(value===null){
+                                                return 0;
+                                            }
+                                            return Number(value);
+                                        }
+                                        return value;
+                                    })
+                                })
+
+                                institutionVisitByTime[0].push({role: "style"});
+                                institutionVisitByTime[1].push("#4DD0E1");
+                                institutionVisitByTime[2].push("#AED581");
+                                institutionVisitByTime[3].push("#FFD54F");
+                                institutionVisitByTime[4].push("#A1887F");
+
+                                google.charts.setOnLoadCallback(drawInstiByTimeChart);
+                                function drawInstiByTimeChart() {
+                                    var data = google.visualization.arrayToDataTable(institutionVisitByTime);
+                                    var view = new google.visualization.DataView(data);
+                                    view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        },
+                                        2]);
+
+                                    var options = {
+                                        title: "Institution visit from " + $('#startDate').val() + " to " + $('#endDate').val(),
+                                        width: 700,
+                                        height: 400,
+                                        bar: {groupWidth: "95%"},
+                                        legend: {position: "none"},
+                                    };
+                                    var chart = new google.visualization.ColumnChart(document.getElementById("chart"));
+                                    chart.draw(view, options);
+                                }
+
+//                                DRAW SMALLER CHART
+                                google.charts.setOnLoadCallback(drawInstiByTimeSmallChart);
+                                function drawInstiByTimeSmallChart() {
+                                    var data = google.visualization.arrayToDataTable(institutionVisitByTime);
+                                    var view = new google.visualization.DataView(data);
+                                    view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        },
+                                        2]);
+
+                                    var options = {
+                                        title: "Institution visit from " + $('#startDate').val() + " to " + $('#endDate').val(),
+                                        width: 300,
+                                        height: 350,
+                                        bar: {groupWidth: "95%"},
+                                        legend: {position: "none"},
+                                    };
+                                    var chart = new google.visualization.ColumnChart(document.getElementById("smallerChart"));
+                                    chart.draw(view, options);
+                                }
+
+                            }
+
+                        })
+                    }
+                    else if($('#filterBy').val()=== "School"
+                        && $('#startDate').val() ===''
+                        && $('#endDate').val()===''){
+                        google.charts.setOnLoadCallback(drawSchoolChart);
+                        google.charts.setOnLoadCallback(drawSchoolSmallChart);
+
+                    }
+                    else if($('#filterBy').val()=== "School"
+                        && $('#startDate').val()!==''
+                        && $('#endDate').val()!==''){
+                        $.ajax({
+                            url: "chartSchoolByTime.php", //EDIT THIS URL TO THE FILE HANDLE IMPORT TO DTB METHOD
+                            type: "post",
+                            dateType: "text",
+                            data: {
+                                startDate: $('#startDate').val() + ' 00:00:00',
+                                endDate: $('#endDate').val() + ' 00:00:00'
+                            },
+                            success: function (result) {
+                                console.log(result);
+                                window.schoolVisitByTime = JSON.parse(result);
+//                    FORMAT THE DATA TYPE FOR THE CHART
+                                var institution_ids = ["name","1", "2", "3", "4"]
+                                window.schoolVisitByTime = schoolVisitByTime.map(function(row) {
+                                    if (row === schoolVisitByTime[0]) {
+                                        return row;
+                                    }
+                                    return institution_ids.map(function(id, index) {
+                                        if(index === 0) return row[0]
+                                        var result = row.find(function(col) {
+                                            return col.institution_id === id
+                                        })
+                                        return result ? Number(result.visit_number) : 0;
+                                    })
+                                });
+
+                                google.charts.setOnLoadCallback(drawSchoolByTimeChart);
+                                function drawSchoolByTimeChart() {
+                                    var data = google.visualization.arrayToDataTable(window.schoolVisitByTime);
+
+                                    var view = new google.visualization.DataView(data);
+
+                                    var options = {
+                                        chart: {
+                                            title: 'Student visits record',
+                                            subtitle: "Timespan: from " + $('#startDate').val() + " to " + $('#endDate').val(),
+                                        }
+                                    };
+                                    var chart = new google.charts.Bar(document.getElementById('chart'));
+
+
+                                    chart.draw(data, options);
+                                }
+
+
+                                google.charts.setOnLoadCallback(drawSchoolByTimeSmallChart);
+
+                                // Callback that creates and populates a data table,
+                                // instantiates the pie chart, passes in the data and
+                                // draws it.
+                                function drawSchoolByTimeSmallChart() {
+                                    // Create the data table.
+                                    var data = google.visualization.arrayToDataTable(window.schoolVisitByTime);
+
+                                    var options = {
+                                        legend: {
+                                            position: 'top',
+                                            maxLines: 4
+                                        },
+                                        bar: {
+                                            groupWidth: '75%'
+                                        },
+                                        fontSize: 12,
+                                        isStacked: true
+                                    };
+
+                                    // Instantiate and draw our chart, passing in some options.
+                                    var chart = new google.visualization.BarChart(document.getElementById('smallerChart'));
+                                    chart.draw(data, options);
+                                }
+
+
+
+                            }
+
+                        })
+
+                    }
+                });
+//            });
+
             $(document).ready(function() {
-                $('#startDate').datepicker();
-                $('#endDate').datepicker();
+                $('#startDate').datepicker({ dateFormat: 'yy-mm-dd' });
+                $('#endDate').datepicker({ dateFormat: 'yy-mm-dd' });
             })
 
-            $(window).resize(function(){
-            drawChart();
-            drawStackedChart();
-          });
     </script>
 </body>
 
