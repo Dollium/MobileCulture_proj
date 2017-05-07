@@ -3,8 +3,8 @@ date_default_timezone_set('Europe/Helsinki');
 
 $servername = 'localhost';
 $username = 'root';
-$password = '';
-$db = 'mobileculturez';
+$password = 'root';
+$db = 'mobileCulture';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
