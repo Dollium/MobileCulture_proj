@@ -4,6 +4,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $ID = $_SESSION['id'];
+$_SESSION['inst_filt'] = '';
 // print_r($_SESSION);
 ?>
 
@@ -25,13 +26,13 @@ $ID = $_SESSION['id'];
     .prev
     {
       margin-right: 50px;
-      text-decoration:underline;
+
 
     }
     .next
     {
     margin-left: 50px;
-    text-decoration:underline;
+
     }
     .pag
     {
@@ -148,11 +149,16 @@ $ID = $_SESSION['id'];
         <!-- INSTITUTION LIST -->
         <div class="logTable">
             <table>
+              <tr>
+                  <th>Kulttuurilaitos</th>
+                  <th>Päivämäärä</th>
+
+              </tr>
               <?php
               //check if the starting row variable was passed in the URL or not
               if (!isset($_GET['p']) or !is_numeric($_GET['p'])) {
                 //we give the value of the starting row to 0 because nothing was found in URL
-                $p = 1;
+                $p = 15;
               //otherwise we take the value from the URL
               } else {
                 $p = (int)$_GET['p'];
@@ -195,20 +201,35 @@ $ID = $_SESSION['id'];
         </div>
         <div class="logTable pag">
         <?php
+ // count records in database
+        $query = "SELECT COUNT(*) c FROM student_visits WHERE user_id = '$ID'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $i = 0;
+        // Minus -10 so $p won't display an empty page
+        $total = $row['c'] -15;
+
+        if ($row['c'] > 15)
+        {
+
           //now this is the link..
-          $prev = $p - 1;
+          $prev = $p - 15;
           if($_SESSION['inst_filt'] == '')
           {
           //only print a "Previous" link if a "Next" was clicked
-          if ($prev >= 1) {
+          if ($prev > 0) {
               echo '<a class="previous" href="'.$_SERVER['PHP_SELF'].'?p='.$prev.'">Previous</a>';
             }
-            if ($prev < 1) {
+            if ($prev <= 0) {
                 echo '<a class="previous" href="" style="color:#b7b7b7;text-decoration: none;">Previous</a>';
               }
-            echo '<a class="next" href="'.$_SERVER['PHP_SELF'].'?p='.($p+1).'">Next</a>';
+            if($total > $p-1)
+            {
+            echo '<a class="next" href="'.$_SERVER['PHP_SELF'].'?p='.($p+15).'">Next</a>';
           }
-          ?>
+          }
+        }
+?>
         </div>
     </div>
 
