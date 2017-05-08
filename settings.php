@@ -322,11 +322,6 @@ if($_SESSION["isStudent"] == true)
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      <i class="fa fa-code" aria-hidden="true"></i> Offers
-                  </a>
-              </li>
-              <li class="nav-item">
                   <a class="nav-link" href="settings.php">
                       <i class="fa fa-cog" aria-hidden="true"></i> Setting
                   </a>
@@ -406,7 +401,7 @@ elseif ($_SESSION["isSchool"] == true)
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="settings.php">
-                      <i class="fa fa-code" aria-hidden="true"></i> Setting
+                      <i class="fa fa-code" aria-hidden="true"></i> Setting <span class="sr-only">(current)</span>
                   </a>
               </li>
           </ul>
@@ -495,7 +490,7 @@ elseif ($_SESSION["isAdmin"] == true)
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="settings.php">
-                      <i class="fa fa-code" aria-hidden="true"></i> Settings
+                      <i class="fa fa-code" aria-hidden="true"></i> Settings <span class="sr-only">(current)</span>
                   </a>
               </li>
           </ul>
