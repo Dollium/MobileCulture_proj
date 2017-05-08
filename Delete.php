@@ -52,12 +52,15 @@ elseif($_POST["dltBox"]) {
         echo "Deletion successful!";
         if($sql)
         {
-            $sql = mysqli_query($conn, "DELETE FROM student WHERE user_id IN ($delSql)");
+            $sql2 = mysqli_query($conn, "DELETE FROM student WHERE user_id IN ($delSql)");
             if($sql2)
             {
 
-              $sql = mysqli_query($conn, "DELETE FROM student_visits WHERE user_id IN ($delSql)");
-              $_SESSION['delete_success'] = "Käyttäjä poistettu onnistuneesti";
+              $sql3 = mysqli_query($conn, "DELETE FROM student_visits WHERE user_id IN ($delSql)");
+              if($sql3)
+              {
+                $_SESSION['delete_success'] = "Käyttäjä poistettu onnistuneesti";
+              }
 
             }
           }
