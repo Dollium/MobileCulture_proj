@@ -22,34 +22,7 @@ $_SESSION['inst_filt'] = '';
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <title>Title</title>
-    <style>
-    .prev
-    {
-      margin-right: 50px;
 
-
-    }
-    .next
-    {
-    margin-left: 50px;
-
-    }
-    .pag
-    {
-      text-align: center;
-    }
-    @media screen and (max-width: 640px) {
-      .prev
-      {
-        margin-right: 30px;
-
-      }
-      .next
-      {
-        margin-left: 30px;
-      }
-    }
-    </style>
 </head>
 
 <body>
@@ -136,14 +109,8 @@ $_SESSION['inst_filt'] = '';
         if (isset($_POST['institution'])){
             $_SESSION['inst'] = mysqli_real_escape_string($conn, ($_POST['institution']));
             $inst = $_SESSION['inst'];
-
         }
 
-        ?>
-        <?php if(isset($_POST['date'])){
-        $q = mysqli_query($conn, "INSERT INTO `student_visits`(`user_id`, `institution_id`, `time`) VALUES ('$ID','$inst',NOW())");
-
-        }
         ?>
 
         <!-- INSTITUTION LIST -->
@@ -155,17 +122,9 @@ $_SESSION['inst_filt'] = '';
 
               </tr>
               <?php
-              //check if the starting row variable was passed in the URL or not
-              if (!isset($_GET['p']) or !is_numeric($_GET['p'])) {
-                //we give the value of the starting row to 0 because nothing was found in URL
-                $p = 15;
-              //otherwise we take the value from the URL
-              } else {
-                $p = (int)$_GET['p'];
-              }
 
-                if(isset($_POST['institution']) && !empty($_POST['institution']))
-                {
+              if(isset($_SESSION['inst_filt']) && ($_SESSION['inst_filt'] != ''))
+              {
 
                 $sql = "SELECT vi.time as visit_time, ins.Name as name, vi.user_id as id
                 FROM user as us
@@ -174,23 +133,22 @@ $_SESSION['inst_filt'] = '';
                 WHERE vi.user_id = '$ID'
                 AND vi.institution_id ='$inst_filt'
                 ORDER BY visit_time DESC";
-
               }
-              else {
-                $sql = "SELECT vi.time as visit_time, ins.Name as name, vi.user_id as id
-                FROM user as us
-                LEFT JOIN student_visits AS vi ON vi.user_id = us.user_id
-                LEFT JOIN institution AS ins ON ins.institution_id = vi.institution_id
-                WHERE vi.user_id = '$ID'
-                ORDER BY visit_time
-                DESC LIMIT $p, 15";
-            }
+                else {
+                  $sql = "SELECT vi.time as visit_time, ins.Name as name, vi.user_id as id
+                  FROM user as us
+                  LEFT JOIN student_visits AS vi ON vi.user_id = us.user_id
+                  LEFT JOIN institution AS ins ON ins.institution_id = vi.institution_id
+                  WHERE vi.user_id = '$ID'
+                  ORDER BY visit_time DESC";
+                }
 
 
               $result = $conn->query($sql);
 
               while($row = mysqli_fetch_assoc($result)) {
             echo "<tr><td>" . $row["name"]. " </td><td> " . date('j.n.Y', strtotime($row["visit_time"])) . "</td></tr>";
+
           } ?>
 
             </table>
@@ -198,38 +156,6 @@ $_SESSION['inst_filt'] = '';
 
 
 
-        </div>
-        <div class="logTable pag">
-        <?php
- // count records in database
-        $query = "SELECT COUNT(*) c FROM student_visits WHERE user_id = '$ID'";
-        $result = mysqli_query($conn, $query);
-        $row = mysqli_fetch_assoc($result);
-        $i = 0;
-        // Minus -10 so $p won't display an empty page
-        $total = $row['c'] -15;
-
-        if ($row['c'] > 15)
-        {
-
-          //now this is the link..
-          $prev = $p - 15;
-          if($_SESSION['inst_filt'] == '')
-          {
-          //only print a "Previous" link if a "Next" was clicked
-          if ($prev > 0) {
-              echo '<a class="previous" href="'.$_SERVER['PHP_SELF'].'?p='.$prev.'">Previous</a>';
-            }
-            if ($prev <= 0) {
-                echo '<a class="previous" href="" style="color:#b7b7b7;text-decoration: none;">Previous</a>';
-              }
-            if($total > $p-1)
-            {
-            echo '<a class="next" href="'.$_SERVER['PHP_SELF'].'?p='.($p+15).'">Next</a>';
-          }
-          }
-        }
-?>
         </div>
     </div>
 
