@@ -26,7 +26,9 @@ $_SESSION['inst_filt'] = '';
 </head>
 
 <body>
-    <div class="col-lg-8 container" style="background-color: #FFF;">
+  <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="container" style="background-color: #FFF;">
         <div class="row">
             <!-- NAV -->
             <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
@@ -48,12 +50,7 @@ $_SESSION['inst_filt'] = '';
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#offers">
-                                <i class="fa fa-code" aria-hidden="true"></i> Offers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#projects">
+                            <a class="nav-link" href="settings.php">
                                 <i class="fa fa-cog" aria-hidden="true"></i>Setting
                             </a>
                         </li>
@@ -64,9 +61,11 @@ $_SESSION['inst_filt'] = '';
             </nav>
             <br>
         </div>
+      </div>
         <!-- /NAV -->
 <br/>
         <!-- INSTITUTION  LIST-->
+        <div class="container" style="background-color: #FFF;">
         <form name="inst" class="form-inline" method="post" action="studentVisitLog.php">
             <div class="text-sm-center">
               <select class="custom-select mb-2 mr-sm-2 mb-sm-0 institution" name="institution" id="institution" onchange="this.form.submit();">
@@ -158,8 +157,9 @@ $_SESSION['inst_filt'] = '';
 
         </div>
     </div>
-
-
+</div>
+</div>
+</div>
     <!-- jQuery first, then bootstrap js -->
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
