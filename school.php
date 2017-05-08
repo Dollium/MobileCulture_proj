@@ -228,7 +228,7 @@ border-radius: 5px;
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="statistics.html">
+                          <a class="nav-link" href="settings.php">
                               <i class="fa fa-code" aria-hidden="true"></i> Setting
                           </a>
                         </li>
@@ -293,11 +293,11 @@ border-radius: 5px;
 
                       <td>
                       <label class="sr-only" for="name">Name</label>
-                      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name" required>
+                      <input type="text" pattern="[a-zA-Z]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name" required>
                       </td>
                       <td>
                       <label class="sr-only" for="surName">Surname</label>
-                      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Surname" required>
+                      <input type="text" pattern="[a-zA-Z]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Surname" required>
                       </td>
                       <td>
                       <label class="sr-only" for="year">Year</label>
