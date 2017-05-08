@@ -31,6 +31,9 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
     <style>
+    .navbar {
+    background-color: #0050b0 !important;
+  }
     .alert
     {
       margin-bottom: 0!important;
@@ -78,7 +81,7 @@ $row = $result->fetch_assoc();
         font-size: 1.25em;
         font-weight: 700;
         color: white;
-        background-color: #0275d8;
+        background-color: #0050b0;
         display: inline-block;
     }
 
@@ -91,7 +94,7 @@ $row = $result->fetch_assoc();
     }
     .fa-question:hover
     {
-      color:#0275d8;
+      color:#0050b0;
     }
     body {
         font-family: 'Rubik', sans-serif;
@@ -407,7 +410,7 @@ if($_SESSION["isStudent"] == true)
 
   <div class="row">
 
-    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary offcanvas centered ">
+    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse offcanvas centered" style="color: #0050b0;">
       <button class="navbar-toggler navbar-toggler-right" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -423,11 +426,6 @@ if($_SESSION["isStudent"] == true)
               <li class="nav-item">
                   <a class="nav-link" href="studentVisitLog.php">
                       <i class="fa fa-user-circle-o" aria-hidden="true"></i> Log
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      <i class="fa fa-code" aria-hidden="true"></i> Offers
                   </a>
               </li>
               <li class="nav-item">
@@ -499,7 +497,7 @@ unset($_SESSION['size_large_mobi']);
 
     <div class="col-lg-8 info" id="outerStuInfo">
       <div class="col-lg-12 bordered" style="" id="studentInfo">
-        <h2 class="boldie" style="color:#0275d8; ">
+        <h2 class="boldie" style="color: #0050b0; ">
 
                 Student details
         </h2>
@@ -585,7 +583,7 @@ unset($_SESSION['size_large_mobi']);
         <div class="col-lg-8 offset-lg-2 stat bordered">
           <div class="row">
             <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 stat_icon">
-            <i class="fa fa-gamepad fa-3x" aria-hidden="true"></i>
+            <i class="fa fa-gamepad fa-3x" aria-hidden="true" style="color: #0050b0;"></i>
           </div>
             <div class="col-lg-9 col-md-9 col-sm-10 totalVisits" style="padding-top: 7px;">
 
@@ -597,9 +595,8 @@ unset($_SESSION['size_large_mobi']);
                  $row = mysqli_fetch_assoc($result);
                  echo $row['c'];
                  ?>
-
                </span>
-              <span> &nbsp;visits</span>
+              <span> &nbsp;käyntikertaa</span>
             </div>
           </div>
         </div>
@@ -609,7 +606,7 @@ unset($_SESSION['size_large_mobi']);
         <div class="col-lg-8 offset-lg-2 stat bordered">
           <div class="row">
             <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 stat_icon">
-              <i class="fa fa-snowflake-o fa-3x" aria-hidden="true"></i>
+              <i class="fa fa-snowflake-o fa-3x" aria-hidden="true" style="color: #0050b0;"></i>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 totalVisits" style="padding-top: 7px;">
               <span style="font-size: 24px; font-weight: bold;">
@@ -619,9 +616,8 @@ unset($_SESSION['size_large_mobi']);
                 $row = mysqli_fetch_assoc($result);
                 echo $row['c'];
                 ?>
-
               </span>
-              <span> &nbsp;visits</span>
+              <span> &nbsp;käyntikertaa</span>
             </div>
           </div>
         </div>
@@ -631,7 +627,7 @@ unset($_SESSION['size_large_mobi']);
         <div class="col-lg-8 offset-lg-2 stat bordered">
           <div class="row">
             <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 stat_icon">
-              <i class="fa fa-anchor fa-3x" aria-hidden="true"></i>
+              <img src="sinfonia.png" height="48px" width="auto" />
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 totalVisits" style="padding-top: 7px;">
               <span style="font-size: 24px; font-weight: bold;margin-top: 10px;">
@@ -641,9 +637,8 @@ unset($_SESSION['size_large_mobi']);
                 $row = mysqli_fetch_assoc($result);
                 echo $row['c'];
                 ?>
-
               </span>
-              <span>&nbsp; visits</span>
+              <span>&nbsp;käyntikertaa</span>
             </div>
           </div>
         </div>
@@ -653,7 +648,7 @@ unset($_SESSION['size_large_mobi']);
         <div class="col-lg-8 offset-lg-2 stat bordered">
           <div class="row">
             <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 stat_icon">
-              <i class="fa fa-heart fa-3x" aria-hidden="true"></i>
+              <i class="fa fa-film fa-3x" aria-hidden="true" style="color: #0050b0;"></i>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 totalVisits" style="padding-top: 7px;">
               <span style="font-size: 24px; font-weight: bold; margin-top: 10px;">
@@ -663,11 +658,8 @@ unset($_SESSION['size_large_mobi']);
                 $row = mysqli_fetch_assoc($result);
                 echo $row['c'];
                 ?>
-
-
-
               </span>
-              <span>&nbsp;visits</span>
+              <span>&nbsp;käyntikertaa</span>
             </div>
         </div>
         </div>
@@ -680,7 +672,6 @@ unset($_SESSION['size_large_mobi']);
     <div class="col-lg-12" style="border-top:1px solid;">
       <p style="margin-right:40px;float:right;margin-top:5px;"><i class="fa fa-question fa-2x" aria-hidden="true"></i></p>
     </div>
-  </div>
 
 
 
@@ -696,12 +687,11 @@ else{ ?>
 
             <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
+                <span class="navbar-toggler-icon"></span>
+                </button>
                 <a class="navbar-brand" href="#">Logo</a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
 
 
 
@@ -735,7 +725,8 @@ else{ ?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 <script src="js/jasny-bootstrap.min.js"></script>
+
 </body>
