@@ -76,5 +76,11 @@ while ($data = fgetcsv($handle,1000, ";", '"' ))
             }
 
 }
-header('location:addstudent_resp.php');
+if($_SESSION['isSchool'] == true)
+{
+header('location:school.php');
+}
+else {
+  header('location:addstudent_resp.php');
+}
 //
