@@ -128,7 +128,9 @@ background-color: #c2f1c2;
 </head>
 
 <body>
-    <div class="col-lg-8 container" style="background-color: #FFF;">
+  <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="container" style="background-color: #FFF;">
 
         <div class="row">
 
@@ -332,6 +334,9 @@ background-color: #c2f1c2;
         }
         </script>
     </div>
+    </div>
+    </div>
+
 </body>
 
 </html>
