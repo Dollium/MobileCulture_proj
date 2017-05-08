@@ -228,11 +228,6 @@ border-radius: 5px;
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="addstudent_resp.php">
-                              <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Student
-                          </a>
-                      </li>
-                      <li class="nav-item">
                           <a class="nav-link" href="statistics.html">
                               <i class="fa fa-code" aria-hidden="true"></i> Setting
                           </a>
