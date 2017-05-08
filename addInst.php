@@ -115,7 +115,9 @@ td, th {
 </head>
 
 <body>
-    <div class="col-lg-8 container" style="background-color: #FFF;">
+  <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="container" style="background-color: #FFF;">
 
         <div class="row">
 
@@ -326,6 +328,8 @@ td, th {
             }
         }
         </script>
+    </div>
+    </div>
     </div>
 </body>
 
