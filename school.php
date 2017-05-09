@@ -370,7 +370,7 @@ border-radius: 5px;
                 <form>
                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                       <div class="input-group-addon search_icon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                      <input type="text" name="search" id="textSearch" placeholder="Search" onkeyup="search()">
+                      <input type="text" value="textSearch" id="textSearch" placeholder="Search" onkeyup="search()">
                       </td>
                   </div>
                 </form>
@@ -533,7 +533,7 @@ else{ ?>
 
           // Loop through all table rows, and hide those who don't match the search query
           for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[3];
             if (td) {
               if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
