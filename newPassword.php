@@ -42,21 +42,7 @@
 
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                      <li class="nav-item">
-                          <a class="nav-link" href="adminHomePage.html">
-                              <i class="fa fa-home" aria-hidden="true"></i> Home
-                          </a>
-                      </li>
-                      <li class="nav-item active">
-                          <a class="nav-link" href="addteacher.php">
-                              <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Teacher
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="statistics.html">
-                              <i class="fa fa-code" aria-hidden="true"></i> Setting
-                          </a>
-                      </li>
+
                   </ul>
                   <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>
@@ -81,27 +67,28 @@
           } ?>
           <br/>
           <label for="InputPassword2">New Password</label>
-          <input type="password" class="form-control" id="InputPassword2" placeholder="New Password" name="newPassword" required>
-          <?php if(!empty($_SESSION['passLen']))
+          <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword2" placeholder="New Password" name="newPassword" required>
+          <?php if(!empty($_SESSION['pass_str']))
           {
-          echo "<div class='alert danger'>".$_SESSION['passLen']."</div>"; ?> <?php
-          unset($_SESSION['passLen']);
+          echo "<div class='alert danger'>".$_SESSION['pass_str']."</div>"; ?> <?php
+          unset($_SESSION['pass_str']);
           } ?>
           <br/>
           <label for="InputPassword3">Confirm New Password</label>
-          <input type="password" class="form-control" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required> <br/>
-
+          <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required>
           <?php if(!empty($_SESSION['passMatch']))
           {
           echo "<div class='alert danger'>".$_SESSION['passMatch']."</div>"; ?> <?php
           unset($_SESSION['passMatch']);
-          } ?> </div>
+          } ?> <br/>
+
+
+        </div>
 
 
 
+          <input class="btn" type="submit" value="Vaihda" name="submit" />
 
-          <button class="btn" type="submit" value="send">Change it</button>
-      
       </form>
     </div>
 
