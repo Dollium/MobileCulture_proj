@@ -49,6 +49,12 @@ $row = $result->fetch_assoc();
       border: 1px solid #b4d6b4;
     background-color: #c2f1c2;
     }
+    .alert.text
+     {
+       padding:0 0 0 10px!important;
+       margin-bottom:0!important;
+       color:red;
+     }
     h2, h3
     {
           color: #0275d8!important;
@@ -489,6 +495,17 @@ elseif ($_SESSION["isAdmin"] == true)
                   </a>
               </li>
               <li class="nav-item">
+                            <a class="nav-link" href="addstudent_resp.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add student user
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addInst.php">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
+                            </a>
+                        </li>
+
+              <li class="nav-item">
                   <a class="nav-link" href="settings.php">
                       <i class="fa fa-code" aria-hidden="true"></i> Settings <span class="sr-only">(current)</span>
                   </a>
@@ -565,41 +582,36 @@ elseif ($_SESSION["isAdmin"] == true)
         unset($_SESSION['pass_success']);
         } ?>
         <div class="col-lg-3" id="pass_change_div">
-        <h5> Change your password </h5>
+        <h5> Vaihda salasanasi </h5>
       </div>
         <div class="col-lg-8 passForm">
           <form name="frmChange" role="form" class="form-signin" method="POST" action="passChange.php">
 
-              <label for="InputPassword2">Old Password</label>
-              <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
+            <label for="InputPassword2">Vanha salasana</label>
+            <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
+            <?php if(!empty($_SESSION['Oldpass']))
+            {
+            echo "<div class='alert text'>".$_SESSION['Oldpass']."</div>"; ?> <?php
+            unset($_SESSION['Oldpass']);
+            } ?>
+            <br/>
+            <label for="InputPassword2">Uusi salasana</label>
+            <input type="password" class="form-control newpass" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword2" placeholder="New Password" name="newPassword" required>
+            <?php if(!empty($_SESSION['pass_str']))
+            {
+            echo "<div class='alert text'>".$_SESSION['pass_str']."</div>"; ?> <?php
+            unset($_SESSION['pass_str']);
+            } ?>
+            <br/>
+            <label for="InputPassword3">Vahvista uusi salasana</label>
+            <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required>
+            <?php if(!empty($_SESSION['passMatch']))
+            {
+            echo "<div class='alert text'>".$_SESSION['passMatch']."</div>"; ?> <?php
+            unset($_SESSION['passMatch']);
+            } ?> <br/>
 
-                <?php if(!empty($_SESSION['Oldpass']))
-                {
-                echo "<div class='alert danger'>".$_SESSION['Oldpass']."</div>"; ?> <?php
-                unset($_SESSION['Oldpass']);
-                } ?>
-
-              <br/>
-              <label for="InputPassword2">New Password</label>
-              <input type="password" class="form-control" id="InputPassword2" placeholder="New Password" name="newPassword" required>
-
-              <?php if(!empty($_SESSION['passLen']))
-              {
-              echo "<div class='alert success'>".$_SESSION['passLen']."</div>"; ?> <?php
-              unset($_SESSION['passLen']);
-              } ?>
-
-              <br/>
-              <label for="InputPassword3">Confirm New Password</label>
-              <input type="password" class="form-control" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required> <br/>
-
-              <?php if(!empty($_SESSION['passMatch']))
-              {
-              echo "<div class='alert danger'>".$_SESSION['passMatch']."</div>"; ?> <?php
-              unset($_SESSION['passMatch']);
-              } ?>
-
-              <label for=""></label><button class="btn" type="submit" value="send">Change it</button>
+              <label for=""></label><input class="btn" type="submit" value="Vaihda" name="submit" />
 
 
           </form>
