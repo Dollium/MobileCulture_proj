@@ -57,6 +57,17 @@
           <br>
 
       <form name="frmChange" role="form" class="form-signin" method="POST" action="passChange.php">
+      
+        <?php if(!empty($_SESSION['bbbb']))
+        {
+        echo "<div class='alert danger'>".$_SESSION['bbbb']."</div>"; ?> <?php
+        unset($_SESSION['bbbb']);
+        } ?>
+        <?php if(!empty($_SESSION['pass_fail']))
+        {
+        echo "<div class='alert danger'>".$_SESSION['pass_fail']."</div>"; ?> <?php
+        unset($_SESSION['pass_fail']);
+        } ?>
         <div class="form-group">
           <label for="InputPassword2">Old Password</label>
           <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
@@ -67,7 +78,7 @@
           } ?>
           <br/>
           <label for="InputPassword2">New Password</label>
-          <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword2" placeholder="New Password" name="newPassword" required>
+          <input type="password" class="form-control newpass" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword2" placeholder="New Password" name="newPassword" required>
           <?php if(!empty($_SESSION['pass_str']))
           {
           echo "<div class='alert danger'>".$_SESSION['pass_str']."</div>"; ?> <?php
@@ -100,8 +111,6 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
       <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
-
-
 </body>
 
 </html>
