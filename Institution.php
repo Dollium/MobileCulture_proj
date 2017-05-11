@@ -47,7 +47,7 @@ $inst=$_SESSION['institutionID'];
    					}
                	} 
                	echo"<tr><td> Week_Year </td><td> Code </td></tr>";
-               	$query = "SELECT week_year, code FROM institution_code_" .$inst. " ORDER BY week_year ASC";
+               	$query = "SELECT week_year, code FROM institution_code_" .$inst. " ORDER BY LENGTH(week_year), week_year ASC";
              	$result = mysqli_query($conn, $query);
               	while($row = mysqli_fetch_array($result))
               	{
