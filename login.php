@@ -32,7 +32,7 @@ else {
      if($password == md5('123456')){
        $_SESSION["isStudent"] = false;
        $_SESSION["isAdmin"] = false;
-       $_SESSION["isTeacher"] = false;
+       $_SESSION["isInstitution"] = false;
        $_SESSION["isSchool"] = false;
 
       header('location:newPassword.php');
@@ -45,27 +45,27 @@ else {
       {
         $_SESSION["isStudent"] = true;
         $_SESSION["isAdmin"] = false;
-        $_SESSION["isTeacher"] = false;
+        $_SESSION["isInstitution"] = false;
         $_SESSION["isSchool"] = false;
 
 
 
         header('location:student.php');
       }
-      elseif ($row['user_type_id'] == 2)
+      elseif ($row['user_type_id'] == 4)
       {
         $_SESSION["isStudent"] = false;
         $_SESSION["isAdmin"] = false;
-        $_SESSION["isTeacher"] = true;
+        $_SESSION["isInstitution"] = true;
         $_SESSION["isSchool"] = false;
 
-        header('location:teacher.php');
+        header('location:Institution.php');
       }
       elseif ($row['user_type_id'] == 1)
       {
         $_SESSION["isStudent"] = false;
         $_SESSION["isAdmin"] = false;
-        $_SESSION["isTeacher"] = false;
+        $_SESSION["isInstitution"] = false;
         $_SESSION["isSchool"] = true;
 
         header('location:school.php');
@@ -74,7 +74,7 @@ else {
       {
         $_SESSION["isStudent"] = false;
         $_SESSION["isAdmin"] = true;
-        $_SESSION["isTeacher"] = false;
+        $_SESSION["isInstitution"] = false;
         $_SESSION["isSchool"] = false;
 
         header('location:admin.php');
