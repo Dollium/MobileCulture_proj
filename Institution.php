@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $_SESSION['institutionID'] = 1;
 $inst=$_SESSION['institutionID'];
-<!-- Need institution authentication -->
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +34,10 @@ $inst=$_SESSION['institutionID'];
 					$code=$inst+$week*7+$month*7*5+$year*7*5*12;
 					$code .=substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2);
                 	$week_year_value= $week . "_" . $year;
-                	$insertCodeQuery = "INSERT INTO institution_code (week_year, institution_" .$inst. ")
-										SELECT * FROM (SELECT '" .$week_year_value. "', '" .$code. "') AS code
+                	$insertCodeQuery = "INSERT INTO institution_code_" .$inst. " (week_year, code)
+										SELECT * FROM (SELECT '" .$week_year_value. "', '" .$code. "') AS confirmation
 										WHERE NOT EXISTS (
-    										SELECT week_year FROM institution_code WHERE week_year=" . $week_year_value ."
+    										SELECT week_year FROM institution_code_" .$inst. " WHERE week_year=" . $week_year_value ."
 										) LIMIT 1;";
 					
 					if (mysqli_query($conn, $insertCodeQuery)){
@@ -48,11 +47,11 @@ $inst=$_SESSION['institutionID'];
    					}
                	} 
                	echo"<tr><td> Week_Year </td><td> Code </td></tr>";
-               	$query = "SELECT week_year, institution_" .$inst. " FROM institution_code";
+               	$query = "SELECT week_year, code FROM institution_code_" .$inst. " ORDER BY week_year ASC";
              	$result = mysqli_query($conn, $query);
               	while($row = mysqli_fetch_array($result))
               	{
-                	echo"<tr><td>". $row["week_year"] ." </td><td> ". $row["institution_".$inst.""] ." </td></tr>";
+                	echo"<tr><td>". $row["week_year"] ." </td><td> ". $row["code"] ." </td></tr>";
               	}
                       
                 ?>
