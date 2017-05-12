@@ -9,6 +9,7 @@ $result_inst= mysqli_query($conn,$sql_inst);
 $row_inst = $result_inst->fetch_assoc();
 $_SESSION['institutionID'] = $row_inst['institution_id'];
 $inst=$_SESSION['institutionID'];
+$inst_name=$row_inst['Name'];
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ $inst=$_SESSION['institutionID'];
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Institution Page</a>
+                <a class="navbar-brand" href="#">Institution Page - <?php echo $inst_name; ?></a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -54,9 +55,25 @@ $inst=$_SESSION['institutionID'];
 					<?php
 					$month=date('n');
 					$year=date('o');
+					
 					for (  $week=1; $week<(date('W', mktime(0,0,0,12,28,$year))+1); $week++) {
-						$code=$inst+$week*7+$month*7*5+$year*7*5*12;
-						$code .=substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2);
+						switch($inst) {
+							case 1:
+								$code='MU';
+								break;
+							case 2:
+								$code='TE';
+								break;
+							case 3:
+								$code='SI';
+								break;
+							case 4:
+								$code='KI';
+								break;
+						}
+						
+						$code .=$inst+$week*7+$month*7*5+$year*7*5*12;
+						$code .=substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2); 
 	                	$week_year_value= $week . "_" . $year;
 	                	$insertCodeQuery = "INSERT INTO institution_code_" .$inst. " (week_year, code)
 											SELECT * FROM (SELECT '" .$week_year_value. "', '" .$code. "') AS confirmation
