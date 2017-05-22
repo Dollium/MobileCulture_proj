@@ -1,8 +1,8 @@
 <?php
 include 'config.php';
 session_start();
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,11 @@ error_reporting(E_ALL);
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+
+    .container
+    {
+      padding-bottom: 50px;
+    }
     #chart {
         width: 100%;
         min-height: 450px;
@@ -22,16 +27,7 @@ error_reporting(E_ALL);
         width: 100%;
         min-height: 200px;
       }
-      .row, .container
-      {
-        padding-left: 0!important;
-        padding-right: 0!important;
 
-      }
-      .row{
-        margin-right:0!important;
-        margin-left:0!important;
-      }
       #startDate, #endDate{
           border: 1px solid darkgray;
       }
@@ -67,93 +63,106 @@ error_reporting(E_ALL);
 </head>
 
 <body>
-    <!--<div class="col-lg-8 container" style="background-color: #FFF;">-->
 <div class="container-fluid">
-  <div class="row">
-    <div class="container">
+  <div class="row-fluid">
+    <div class="container" style="background-color:#f3f3f5;">
+      <?php
+      // User access restriction
+      if($_SESSION["isAdmin"] == true)
+      {
+        $_SESSION['schoolID'] = '1';
+      ?>
       <div class="row">
-        <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
+        <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered bordered admin">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-            <a class="navbar-brand" href="#">Admin Page</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="school.php">
-                                <i class="fa fa-home" aria-hidden="true"></i> Home
-                            </a>
-                        </li>
+          <a class="navbar-brand" href="admin.php"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="admin.php">
+                    <i class="fa fa-home" aria-hidden="true"></i> Etusivu
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="addSclAd.php">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää koulun käyttäjä
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="addstudent.php">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää opiskelija
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="addInst.php">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää instituutio
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="settings.php">
+                    <i class="fa fa-code" aria-hidden="true"></i> Asetukset
+                  </a>
+                </li>
+              </ul>
+              <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </div>
+          </nav>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="addSclAd.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add school admin
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addstudent_resp.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add student user
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addInst.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="settings.php">
-                                <i class="fa fa-code" aria-hidden="true"></i> Setting
-                            </a>
-                        </li>
-                    </ul>
-                    <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                </a>
-                </div>
-            </nav>
+          <div class="container bordered" style="background-color:#f3f3f5;">
             <br>
-        </div>
-
-        <br>
-        <div class="row" style="max-width:100%;">
-          <div class="col-sm-12">
-<!--          <form>-->
-
+            <div class="row" style="max-width:100%;">
+              <div class="col-sm-12">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Show statistics by</label>
                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="filterBy">
-                  <option selected>School</option>
-                  <option >Institution</option>
-              </select>
+                  <option selected>Koulu</option>
+                  <option >Instituutio</option>
+                </select>
                 <br>
                 <br>
                 <input type="text" name="startDate" id="startDate">
                 <input type="text" name="endDate" id="endDate">
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary" id="getStatistic">Get the statistics</button>
-
-<!--            </form>-->
-          </div>
+                <button type="submit" class="btn btn-primary" id="getStatistic">Hae tilastot</button>
+              </div>
               <div class="col-sm-12">
-            <br>
-
+                <br>
                 <div id="chart">
-<!--                    <div id="columnchart_material" style="width: 900px; height: 500px;">-->
-<!---->
-<!--                    </div>-->
-<!--                    <div id="stacked_chart" style="width:100%; height:300px">-->
-<!---->
-<!--                    </div>-->
                 </div>
-                  <div id="smallerChart">
+                <div id="smallerChart">
+                </div>
 
-                  </div>
-
-
+              </div>
+            </div>
+          </div>
+        <?php }
+        // Show to non-admin users
+        else { ?>
+          <div class="row">
+            <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand" href="#"><img src="/img/Lahti_logo_nega_RGB_web.jpg" /></a>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              </div>
+              <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="index.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </nav>
+            <br>
+          </div>
+          <br>
+          <br>
+            <!-- /navbar -->
+          <div class="restrict"><?php echo "Sinulla ei ole oikeuksia katsella sivua."; ?> </div>
+          <br>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>
-</div>
+
 
 
 
@@ -219,9 +228,10 @@ error_reporting(E_ALL);
 
                     var options = {
                         chart: {
-                            title: 'Student visits record',
-                            subtitle: 'Timespan: 6 months',
-                        }
+                            title: 'Opiskelijoiden käyntikerrat',
+                            subtitle: 'Aikaväli: 6 kuukautta',
+                        },
+                         fill: '#f3f3f5'
                     };
 
 //                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
@@ -252,7 +262,8 @@ error_reporting(E_ALL);
                             groupWidth: '75%'
                         },
                         fontSize: 12,
-                        isStacked: true
+                        isStacked: true,
+                         fill: '#f3f3f5'
                     };
 
                     // Instantiate and draw our chart, passing in some options.
@@ -265,7 +276,7 @@ error_reporting(E_ALL);
                 $('#getStatistic').click(function() {
 
 //               CHECK IF DRAW CHART BY DEFAULT 6 MONTHS
-                    if($('#filterBy').val()=== "Institution"
+                    if($('#filterBy').val()=== "Instituutio"
                         && $('#startDate').val() ===''
                         && $('#endDate').val()==='') {
 
@@ -282,11 +293,12 @@ error_reporting(E_ALL);
                                 2]);
 
                             var options = {
-                                title: "Institution visit for 6 months",
+                                title: "Käynnit laitoksittain viimeisen 6kk aikana",
                                 width: 700,
                                 height: 400,
                                 bar: {groupWidth: "95%"},
                                 legend: { position: "none" },
+                                 fill: '#f3f3f5',
                             };
                             var chart = new google.visualization.ColumnChart(document.getElementById("chart"));
                             chart.draw(view, options);
@@ -305,18 +317,19 @@ error_reporting(E_ALL);
                                 2]);
 
                             var options = {
-                                title: "Institution visit for 6 months",
+                                title: "Käynnit laitoksittain viimeisen 6kk aikana",
                                 width: 300,
                                 height: 350,
                                 bar: {groupWidth: "95%"},
                                 legend: { position: "none" },
+                                 fill: '#f3f3f5',
                             };
                             var chart = new google.visualization.ColumnChart(document.getElementById("smallerChart"));
                             chart.draw(view, options);
                         }
                     }
 //                    CHECK IF THE CHART IS FILTER BY TIME
-                    else if($('#filterBy').val()=== "Institution"
+                    else if($('#filterBy').val()=== "Instituutio"
                         && $('#startDate').val()!==''
                         && $('#endDate').val()!=='') {
 
@@ -366,11 +379,12 @@ error_reporting(E_ALL);
                                         2]);
 
                                     var options = {
-                                        title: "Institution visit from " + $('#startDate').val() + " to " + $('#endDate').val(),
+                                        title: "Käynnit laitoksittain välillä: " + $('#startDate').val() + " - " + $('#endDate').val(),
                                         width: 700,
                                         height: 400,
                                         bar: {groupWidth: "95%"},
                                         legend: {position: "none"},
+                                         fill: '#f3f3f5',
                                     };
                                     var chart = new google.visualization.ColumnChart(document.getElementById("chart"));
                                     chart.draw(view, options);
@@ -391,11 +405,12 @@ error_reporting(E_ALL);
                                         2]);
 
                                     var options = {
-                                        title: "Institution visit from " + $('#startDate').val() + " to " + $('#endDate').val(),
+                                        title: "Käynnit laitoksittain välillä: " + $('#startDate').val() + " - " + $('#endDate').val(),
                                         width: 300,
                                         height: 350,
                                         bar: {groupWidth: "95%"},
                                         legend: {position: "none"},
+                                         fill: '#f3f3f5',
                                     };
                                     var chart = new google.visualization.ColumnChart(document.getElementById("smallerChart"));
                                     chart.draw(view, options);
@@ -405,14 +420,14 @@ error_reporting(E_ALL);
 
                         })
                     }
-                    else if($('#filterBy').val()=== "School"
+                    else if($('#filterBy').val()=== "Koulu"
                         && $('#startDate').val() ===''
                         && $('#endDate').val()===''){
                         google.charts.setOnLoadCallback(drawSchoolChart);
                         google.charts.setOnLoadCallback(drawSchoolSmallChart);
 
                     }
-                    else if($('#filterBy').val()=== "School"
+                    else if($('#filterBy').val()=== "Koulu"
                         && $('#startDate').val()!==''
                         && $('#endDate').val()!==''){
                         $.ajax({
@@ -449,9 +464,10 @@ error_reporting(E_ALL);
 
                                     var options = {
                                         chart: {
-                                            title: 'Student visits record',
-                                            subtitle: "Timespan: from " + $('#startDate').val() + " to " + $('#endDate').val(),
-                                        }
+                                            title: 'Opiskelijoiden käyntikerrat',
+                                            subtitle: "Aikaväli: " + $('#startDate').val() + " - " + $('#endDate').val(),
+                                        },
+                                         fill: '#f3f3f5'
                                     };
                                     var chart = new google.charts.Bar(document.getElementById('chart'));
 
@@ -478,7 +494,8 @@ error_reporting(E_ALL);
                                             groupWidth: '75%'
                                         },
                                         fontSize: 12,
-                                        isStacked: true
+                                        isStacked: true,
+                                         fill: '#f3f3f5',
                                     };
 
                                     // Instantiate and draw our chart, passing in some options.

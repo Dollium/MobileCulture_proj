@@ -19,7 +19,7 @@ header('Context-type: text/javascript');
 
     $instiQuery = "SELECT Name, visit_number FROM institution LEFT OUTER JOIN 
     (SELECT `institution_id`, `time`, COUNT(institution_id) AS visit_number FROM `student_visits` 
-    WHERE time BETWEEN '".$_POST['startDate']."' AND '".$_POST['endDate']."' group BY institution_id) 
+	WHERE time BETWEEN '".$_POST['startDate']."' AND '".$_POST['endDate']."' group BY institution_id) 
     AS visits ON institution.institution_id = visits.institution_id";
 
 //    echo $instiQuery;

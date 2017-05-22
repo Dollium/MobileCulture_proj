@@ -30,7 +30,7 @@ $school1 = array('Kannaksen lukio ');
 $school1Query= "SELECT Name, institution_id, visit_number from school join
                 (SELECT school_id, institution_id, COUNT(institution_id) as visit_number FROM student_visits LEFT OUTER JOIN student
                 on student_visits.user_id = student.user_id WHERE school_id = 1 AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) 
-                AND CURRENT_DATE() GROUP BY institution_id, school_id )
+                AND CURRENT_DATE()+1 GROUP BY institution_id, school_id )
                 as school_visit on school.school_id = school_visit.school_id ORDER by school.school_id, institution_id ASC";
 $school1Result = mysqli_query($conn, $school1Query);
 while($row = mysqli_fetch_object($school1Result))
@@ -46,7 +46,7 @@ while($row = mysqli_fetch_object($school1Result))
 $school2 = array('Tiirismaan lukio ');
 $school2Query= "SELECT Name, institution_id, visit_number from school join
                 (SELECT school_id, institution_id, COUNT(institution_id) as visit_number FROM student_visits LEFT OUTER JOIN student
-                on student_visits.user_id = student.user_id WHERE school_id = 2  AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE() 
+                on student_visits.user_id = student.user_id WHERE school_id = 2  AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE()+1 
                 GROUP BY institution_id, school_id )
                 as school_visit on school.school_id = school_visit.school_id ORDER by school.school_id, institution_id ASC";
 $school2Result = mysqli_query($conn, $school2Query);
@@ -60,8 +60,8 @@ while($row = mysqli_fetch_object($school2Result))
 $school3 = array('Lahden lyseo ');
 $school3Query= "SELECT Name, institution_id, visit_number from school join
                 (SELECT school_id, institution_id, COUNT(institution_id) as visit_number FROM student_visits LEFT OUTER JOIN student
-                on student_visits.user_id = student.user_id WHERE school_id = 3 AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE() 
-                GROUP BY institution_id, school_id)
+                on student_visits.user_id = student.user_id WHERE school_id = 3  AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE()+1 
+                GROUP BY institution_id, school_id )
                 as school_visit on school.school_id = school_visit.school_id ORDER by school.school_id, institution_id ASC";
 $school3Result = mysqli_query($conn, $school3Query);
 while($row = mysqli_fetch_object($school3Result))
@@ -73,7 +73,7 @@ while($row = mysqli_fetch_object($school3Result))
 $school4 = array('Nastopolin lukio ');
 $school4Query= "SELECT Name, institution_id, visit_number from school join
                 (SELECT school_id, institution_id, COUNT(institution_id) as visit_number FROM student_visits LEFT OUTER JOIN student
-                on student_visits.user_id = student.user_id WHERE school_id = 4 AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE() 
+                on student_visits.user_id = student.user_id WHERE school_id = 4 AND time BETWEEN (CURRENT_DATE() - INTERVAL 6 MONTH) AND CURRENT_DATE()+1 
                 GROUP BY institution_id, school_id )
                 as school_visit on school.school_id = school_visit.school_id ORDER by school.school_id, institution_id ASC";
 $school4Result = mysqli_query($conn, $school4Query);

@@ -1,8 +1,8 @@
 <?php
 include 'config.php';
 session_start();
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 $ID = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ $ID = $_SESSION['id'];
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
@@ -182,12 +182,12 @@ border-radius: 5px;
   width:100%;}
 
 	/* Labels on td*/
-	.user_log td:nth-of-type(2):before { content: "First Name"; }
-	.user_log td:nth-of-type(3):before { content: "Surname"; }
-	.user_log td:nth-of-type(4):before { content: "Email"; }
-	.user_log td:nth-of-type(5):before { content: "School"; }
-  .user_log td:nth-of-type(6):before { content: "Starting year"; }
-  .user_log td:nth-of-type(7):before { content: "Remove"; }
+	.user_log td:nth-of-type(2):before { content: "Etunimi"; }
+	.user_log td:nth-of-type(3):before { content: "Sukunimi"; }
+	.user_log td:nth-of-type(4):before { content: "Sähköposti"; }
+	.user_log td:nth-of-type(5):before { content: "Koulu"; }
+  .user_log td:nth-of-type(6):before { content: "Aloitusvuosi"; }
+  .user_log td:nth-of-type(7):before { content: "Poista"; }
 
 
   td.desktop
@@ -202,351 +202,317 @@ border-radius: 5px;
 <body>
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="container">
-
-
+      <div class="container" style="background-color:#f3f3f5;">
       <?php
-
       if($_SESSION["isSchool"] == true)
       {
-        $ID = $_SESSION['id'];
       ?>
-        <div class="row-fluid">
+      <!-- navbar -->
+      <div class="row">
+        <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
 
-            <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="#">Admin Page</a>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="school.php">
-                                  <i class="fa fa-home" aria-hidden="true"></i> Home
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="settings.php">
-                              <i class="fa fa-code" aria-hidden="true"></i> Setting
-                          </a>
-                        </li>
-                    </ul>
-                    <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                  </a>
-                </div>
-            </nav>
-            <br>
-        </div>
-
-
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="school.php">
+                            <i class="fa fa-home" aria-hidden="true"></i> Etusivu
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">
+                        <i class="fa fa-code" aria-hidden="true"></i> Asetukset
+                    </a>
+                  </li>
+              </ul>
+              <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </div>
+          </nav>
         <!-- /navbar -->
+
         <?php
-        $sql = "SELECT * FROM school WHERE school_admin_id='$ID'";
+        $sql = "SELECT * FROM school_admin_users WHERE school_admin_id='$ID'";
         $result= mysqli_query($conn,$sql);
         $row = $result->fetch_assoc();
         $_SESSION['schoolID'] = $row['school_id'];
         $sID = $_SESSION['schoolID'];
          ?>
-        <div class="addStudent">
-          <!-- successes and errors for registration -->
-          <?php if(!empty($_SESSION['success_registration']))
-          {
-          echo "<div class='alert success'>".$_SESSION['success_registration']."</div>"; ?> <?php
-          unset($_SESSION['success_registration']);
-          } ?>
-          <?php if(!empty($_SESSION['email_taken']))
-          {
-          echo "<div class='alert danger'>".$_SESSION['email_taken']."</div>"; ?> <?php
-          unset($_SESSION['email_taken']);
-          } ?>
-          <?php if(!empty($_SESSION['error']))
-          {
-          echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
-          unset($_SESSION['error']);
-          } ?>
+        <div class="container addStudent" style="background-color:#f3f3f5; padding-bottom: 50px;">
+          <br>
+          <?php
+            // successes and errors for registration
 
-          <!-- successes and errors for deletion -->
-            <?php if(!empty($_SESSION['delete_success']))
+           if(!empty($_SESSION['success_registration'])){
+            echo "<div class='alert success'>".$_SESSION['success_registration']."</div>"; ?> <?php
+            unset($_SESSION['success_registration']);
+            }
+
+            if(!empty($_SESSION['email_taken']))
             {
-            echo "<div class='alert success'>".$_SESSION['delete_success']."</div>"; ?> <?php
-            unset($_SESSION['delete_success']);
-            } ?>
-            <?php if(!empty($_SESSION['delete_unsuccess']))
+              echo "<div class='alert danger'>".$_SESSION['email_taken']."</div>"; ?> <?php
+              unset($_SESSION['email_taken']);
+            }
+
+            if(!empty($_SESSION['error']))
             {
-            echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
-            unset($_SESSION['delete_unsuccess']);
-            } ?>
-            <?php if(!empty($_SESSION['no_delete']))
+              echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
+              unset($_SESSION['error']);
+            }
+
+            if(!empty($_SESSION['format']))
             {
-            echo "<div class='alert danger'>".$_SESSION['no_delete']."</div>"; ?> <?php
-            unset($_SESSION['no_delete']);
-            } ?>
-          <div class="row">
-            <div class="form-inline">
-            <table class="register">
-              <tr>
-                  <td>
+              echo "<div class='alert danger'>".$_SESSION['format']."</div>"; ?> <?php
+              unset($_SESSION['format']);
+            }
 
-                    <form action="studentToDTB.php" method="POST">
 
-                      <td>
-                      <label class="sr-only" for="name">Name</label>
-                      <input type="text" pattern="[a-zA-Z]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Name" required>
-                      </td>
-                      <td>
-                      <label class="sr-only" for="surName">Surname</label>
-                      <input type="text" pattern="[a-zA-Z]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Surname" required>
-                      </td>
-                      <td>
-                      <label class="sr-only" for="year">Year</label>
-                      <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="year" name="year" placeholder="Starting year" required>
-                      </td>
-                      <td>
-                      <label class="sr-only" for="email">Email</label>
-                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <div class="input-group-addon">@</div>
-                          <input type="text" class="form-control" id="email" name="email" placeholder="Useremail" required>
-                          </td>
-                      </div>
-                      <td>
-                      <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                      </td>
-                </form>
-              </td>
+            // Deletion success/error
+            if(!empty($_SESSION['delete_success']))
+            {
+              echo "<div class='alert success'>".$_SESSION['delete_success']."</div>"; ?> <?php
+              unset($_SESSION['delete_success']);
+            }
 
-              </tr>
-            </table>
+            if(!empty($_SESSION['delete_unsuccess']))
+            {
+              echo "<div class='alert danger'>".$_SESSION['delete_unsuccess']."</div>"; ?> <?php
+              unset($_SESSION['delete_unsuccess']);
+            }
+
+            if(!empty($_SESSION['no_delete']))
+            {
+              echo "<div class='alert danger'>".$_SESSION['no_delete']."</div>"; ?> <?php
+              unset($_SESSION['no_delete']);
+            }
+            ?>
+            <div class="row">
+              <div class="form-inline">
+                <table class="register">
+                  <tr>
+                    <td>
+                      <form action="studentToDTB.php" method="POST">
+                        <td>
+                          <label class="sr-only" for="name">Nimi</label>
+                          <input type="text" pattern="[a-zåäöA-ZÅÄÖ]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" name="name" placeholder="Nimi" required>
+                        </td>
+                        <td>
+                          <label class="sr-only" for="surName">Sukunimi</label>
+                          <input type="text" pattern="[a-zåäöA-ZÅÄÖ]+" class="form-control mb-2 mr-sm-2 mb-sm-0" id="surName" name="surName" placeholder="Sukunimi" required>
+                        </td>
+                        <td>
+                          <label class="sr-only" for="year">Aloitusvuosi</label>
+                          <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="year" name="year" placeholder="Aloitusvuosi" required>
+                        </td>
+                        <td>
+                          <label class="sr-only" for="email">Sähköposti</label>
+                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Sähköposti" required>
+                          </div>
+                        </td>
+                        <td>
+                          <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </td>
+                      </form>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
-          </div>
-
-
             <br>
+
             <!--UPLOAD CSV FILE -->
-
             <form action="studentbyCSV.php" method="post" enctype="multipart/form-data">
-                 Or upload a csv file:
-                <input type="file" name="studentFile" id="csvStudentList" style="margin-top:15px;" />
-                <input type="submit" name="upload" id="upload" value="Upload" style="margin-top:10px;" class="btn btn-primary" />
-
+               Tai lataa csv tiedosto:
+              <input type="file" name="studentFile" id="csvStudentList" style="margin-top:15px;" />
+              <input type="submit" name="upload" id="upload" value="Lataa" style="margin-top:10px;" class="btn btn-primary" />
             </form>
 
-            <!--//UPLOAD CSV FILE-->
             <br>
-        </div>
-        <div class="row">
-          <div class="col-lg-3">
-          <form name="year" class="form-inline" method="post">
-              <div class="text-sm-center">
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 year" name="year" id="year" onchange="this.form.submit();">
-                    <?php
-                    $query = "SELECT DISTINCT Starting_year FROM student WHERE school_id = '$sID' ORDER BY Starting_year DESC";
-                    $result = mysqli_query($conn, $query);
-                    echo "<option name='year' value=''> All </option>";
-                    while($row = mysqli_fetch_array($result))
-                    {
-                       $selected = (isset($_POST['year']) && $_POST['year'] == $row['Starting_year']) ? ' selected="selected"' : '';
-                       echo  "<option name='year' value=". $row["Starting_year"] ." ". $selected .">". $row["Starting_year"]."</option>";
-                    }
+            <div class="row">
+              <div class="col-lg-2 col-sm-3">
+                <form name="year" class="form-inline" method="post">
+                  <div class="text-sm-center">
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0 year" name="year" id="year" onchange="this.form.submit();">
 
-                    ?>
-                    <?php
-                    if(isset($_POST['year']) && !empty($_POST['year']))
-                    {
-                      $_SESSION['selected_year'] = $_POST['year'];
-                    }
+                      <?php
+                      $query = "SELECT DISTINCT Starting_year FROM student WHERE school_id = '$sID' ORDER BY Starting_year DESC";
+                      $result = mysqli_query($conn, $query);
+                      echo "<option name='year' value=''> Kaikki </option>";
 
-                    $selectedY = $_SESSION['selected_year'];
+                      while($row = mysqli_fetch_array($result))
+                      {
+                         $selected = (isset($_POST['year']) && $_POST['year'] == $row['Starting_year']) ? ' selected="selected"' : '';
+                         echo  "<option name='year' value=". $row["Starting_year"] ." ". $selected .">". $row["Starting_year"]."</option>";
+                      }
+                      ?>
+                      <?php
+                      if(isset($_POST['year']) && !empty($_POST['year']))
+                      {
+                        $_SESSION['selected_year'] = $_POST['year'];
+                      }
 
-                    ?>
+                      $selectedY = $_SESSION['selected_year'];
 
-              </select>
-                </div>
+                      ?>
 
-              </form>
-</div>
-              <div class="col-lg-6">
-                <form>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                      <div class="input-group-addon search_icon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                      <input type="text" value="textSearch" id="textSearch" placeholder="Search" onkeyup="search()">
-                      </td>
+                    </select>
                   </div>
                 </form>
               </div>
 
+              <!-- Search by email bar -->
+              <div class="col-lg-5 col-sm-5 searchbar">
+                <form style="margin: 0 10px 0 10px;">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon search_icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                    <input type="text" name="textSearch" id="textSearch" placeholder="Hae sähköpostia" onkeyup="search()">
+                  </div>
+                </form>
+              </div>
 
-        </div>
+              <div class="col-lg-2 offset-lg-3 offset-sm-0 col-sm-3 delete_form">
+                <form action="Delete.php" method="post">
+                  <!-- Button for checkbox deletion (clicking this will delete checked rows) -->
+                  <button type="submit" value="dltBox" name="dltBox" onclick="return deleteConfirm()" formaction="Delete.php" class="delete_button btn btn-primary">Poista valitut</button>
+              </div>
+          </div>
 
-
-        <form action="Delete.php" method="post">
-
-          <!-- Button for checkbox deletion (clicking this will delete checked rows) -->
-        <button type="submit" value="dltBox" name="dltBox" onclick="return deleteConfirm()" formaction="Delete.php" class="delete_button btn btn-primary">Delete selected records</button>
-
-        <!-- Student list -->
+          <!-- Student list -->
           <table id="user_log" class="user_log" style="overflow-x:auto; max-width:100%;">
             <tr>
-                <th><input type="checkbox" id="checkAll"></th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>School</th>
-                <th>Starting year</th>
-                <th>Update</th>
-                <th>Remove</th>
-                <th class="mobile"> Registered users </th>
+              <th><input type="checkbox" id="checkAll"></th>
+              <th>Nimi</th>
+              <th>Sukunimi</th>
+              <th>Sähköposti</th>
+              <th>Koulu</th>
+              <th>Aloitusvuosi</th>
+              <th>Päivitä</th>
+              <th>Poista</th>
+              <th class="mobile"> Rekisteröidyt käyttäjät </th>
             </tr>
 
-
             <?php
+
             // Get students from database along with all required information
             if(isset($_POST['year']) && !empty($_POST['year']))
             {
-            $sql = "SELECT us.user_id as userid, us.First_name as First_name, us.Last_name as Last_name, us.Email as Email, scl.Name as school_name, stu.Starting_year as Year
-            FROM user AS us
-            LEFT JOIN student AS stu ON stu.user_id = us.user_id
-            LEFT JOIN school AS scl ON stu.school_id = scl.school_id
-            WHERE user_type_id ='3'
-            AND Starting_year = '$selectedY'
-            AND scl.school_id = '$sID' ";
-
-          }
-          else {
-            $sql = "SELECT us.user_id as userid, us.First_name as First_name, us.Last_name as Last_name, us.Email as Email, scl.Name as school_name, stu.Starting_year as Year
-            FROM user AS us
-            LEFT JOIN student AS stu ON stu.user_id = us.user_id
-            LEFT JOIN school AS scl ON stu.school_id = scl.school_id
-            WHERE user_type_id ='3'
-            AND scl.school_id = '$sID' ";
-}
-
-
+              $sql = "SELECT us.user_id as userid, us.First_name as First_name, us.Last_name as Last_name, us.Email as Email, scl.Name as school_name, stu.Starting_year as Year
+              FROM user AS us
+              LEFT JOIN student AS stu ON stu.user_id = us.user_id
+              LEFT JOIN school AS scl ON stu.school_id = scl.school_id
+              WHERE user_type_id ='3'
+              AND Starting_year = '$selectedY'
+              AND scl.school_id = '$sID'
+              ORDER BY us.Last_name";
+            }
+            else {
+              $sql = "SELECT us.user_id as userid, us.First_name as First_name, us.Last_name as Last_name, us.Email as Email, scl.Name as school_name, stu.Starting_year as Year
+              FROM user AS us
+              LEFT JOIN student AS stu ON stu.user_id = us.user_id
+              LEFT JOIN school AS scl ON stu.school_id = scl.school_id
+              WHERE user_type_id ='3'
+              AND scl.school_id = '$sID'
+              ORDER BY stu.Starting_year DESC, us.Last_name ASC";
+            }
             $result = $conn->query($sql);
 
             // Loop the results to make a table
-
             while($row = mysqli_fetch_assoc($result)) {
               echo "<tr>";
-                              echo '<td class="checkbox"><input  type="checkbox" name="box[]" value='. $row['userid'] .'></td>';
-                              echo "<td>" . $row['First_name'] . "</td>";
-                              echo "<td>" . $row['Last_name'] . "</td>";
-                              echo "<td>" . $row['Email'] . "</td>";
-                              echo "<td>" . $row['school_name'] . "</td>";
-                              echo "<td>" . $row['Year'] . "</td>";
-                              echo "<td></td>";
-                              echo '<td><a href="delete.php?did='. $row['userid'] .'" onclick="return deleteConfirm()" id="delete"><label for="delete"><i class="fa fa-times" aria-hidden="true"></i></label></a></td>';
-                              echo "</tr>"; ?>
-
-
-
-
-                <?php
-
+                echo '<td class="checkbox"><input  type="checkbox" name="box[]" value='. $row['userid'] .'></td>';
+                echo "<td>" . $row['First_name'] . "</td>";
+                echo "<td>" . $row['Last_name'] . "</td>";
+                echo "<td>" . $row['Email'] . "</td>";
+                echo "<td>" . $row['school_name'] . "</td>";
+                echo "<td>" . $row['Year'] . "</td>";
+                echo "<td></td>";
+                echo '<td><a href="Delete.php?did='. $row['userid'] .'" onclick="return deleteConfirm()" id="delete"><label for="delete"><i class="fa fa-times" aria-hidden="true"></i></label></a></td>';
+                echo "</tr>";
               }
 
             ?>
-        </table>
-      </form>
+          </table>
+        </form>
+      </div>
 
-
-<?php }
-else{ ?>
-
-                  <div class="row">
-
-                      <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-                          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <?php }
+      else { ?>
+        <div class="row">
+          <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
-                          <a class="navbar-brand" href="#">Logo</a>
-
-                          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-
-
-                          </div>
-                            <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="index.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                      </nav>
-                      <br>
-                  </div>
-
-                  <br>
-                  <br>
-                  <!-- /navbar -->
-                  <div class="restrict"><?php echo "You are not authorized to access this page."; ?> </div>
-                      <br>
-
-                </div>
-                </center>
-
-
-
-
-          <?php
-          }
-          // print_r($_SESSION);
-          ?>
+            <a class="navbar-brand" href="#"><img src="/img/Lahti_logo_nega_RGB_web.jpg" /></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            </div>
+            <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="index.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+          </nav>
+          <br>
+        </div>
+        <br>
+        <br>
+          <!-- /navbar -->
+        <div class="restrict"><?php echo "Sinulla ei ole oikeuksia katsella sivua."; ?> </div>
+        <br>
+      </div>
+      <?php } ?>
 
     </div>
+  </div>
+</div>
 
 
-    <!-- jQuery first, then bootstrap js -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
+<!-- jQuery first, then bootstrap js -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
-    <!-- jQuery first, then bootstrap js -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
 
-    <script>
+<script>
 
-        $("#checkAll").click(function(){
-            $('input:checkbox').not(this).prop('checked', this.checked);
-        });
+    $("#checkAll").click(function(){
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
 
-        function deleteConfirm(){
-            var result = confirm("Are you sure to delete users?");
-            if(result){
-                return true;
-            }else{
-                return false;
-            }
+    function deleteConfirm(){
+        var result = confirm("Haluatko varmasti poistaa käyttäjät?");
+        if(result){
+            return true;
         }
+        else{
+            return false;
+        }
+      }
 
 
-        function search() {
-          // Declare variables
-          var input, filter, table, tr, td, i;
-          input = document.getElementById("textSearch");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("user_log");
-          tr = table.getElementsByTagName("tr");
+    function search() {
+      // Declare variables
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("textSearch");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("user_log");
+      tr = table.getElementsByTagName("tr");
 
-          // Loop through all table rows, and hide those who don't match the search query
-          for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[3];
-            if (td) {
-              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            }
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
           }
         }
+      }
+    }
 
-
-
-    </script>
+</script>
 
 </body>
 

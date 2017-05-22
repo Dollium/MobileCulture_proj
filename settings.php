@@ -28,652 +28,409 @@ $row = $result->fetch_assoc();
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
-    <style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-image: url("talvi-4.jpg");
-    }
-    .alert
-    {
-      margin-bottom: 0!important;
-
-    }
-    .danger
-    {
-      border: 1px solid #d33f3f;
-      background-color: rgba(247, 70, 70, 0.68);
-    }
-    .success
-    {
-      border: 1px solid #b4d6b4;
-    background-color: #c2f1c2;
-    }
-    .alert.text
-     {
-       padding:0 0 0 10px!important;
-       margin-bottom:0!important;
-       color:red;
-     }
-    h2, h3
-    {
-          color: #0275d8!important;
-    }
-    .form-signin input
-    {
-      width: 50%;
-      display:inline;
-      margin-top: 5px;
-    }
-    .form-signin button
-    {
-      margin-left: 5px;
-      margin-top: 25px;
-    }
-    .form-signin label
-    {
-      width: 200px;
-    }
-
-    .crop img {
-      width: 170px;
-      height: 200px;
-      margin: 0 50px 20px 30px;
-      border: 7px solid white;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.44);
-      border-radius: 5px;
-}
-
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
-
-    table {
-        font-family: "Roboto", helvetica, arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
 
 
-    }
-    thead th{
-      font-weight: 100!important;
-      border-bottom:5px solid #9ea7af;
-      font-size: 20px;
-    }
-    td, th
-    {
-      text-align: left;
-      padding: 8px;
-      font-size: 16px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      background: #EBEBEB;
-    }
-    .container-fluid
-    {
-       padding-left: 0!important;
-       padding-right: 0!important;
-    }
-    .crop
-    {
-      display:inline;
-    }
-.main
-{
-  margin: 15px;
-}
-.upload_form
-{
-  display:inline;
-  margin-top: 40px;
-}
-    .centered
-    {
-      margin: 0 auto;
-    }
-    .bordered
-    {
-      border: 1px solid;
-    }
-
-    .restrict
-    {
-      font-size: 22px;
-
-    }
-    #pass_change_div
-    {
-      display:inline-block;
-      margin-top: 90px;
-      vertical-align:top;
-    }
-    #reset_pass_div
-    {
-      display:inline-block;
-      margin-top: 40px;
-      margin-bottom:40px;
-      vertical-align:top;
-    }
-    #email_result
-    {
-      max-width: 200px;
-      display: inline;
-    }
-    button.mobile
-    {
-      display:none;
-      margin-left: 20px;
-    }
-    .passForm, .photoForm
-    {
-      margin-top: 40px;
-      margin-bottom: 20px;
-
-    }
-    .passForm
-    {
-      display:inline-block;
-    }
-    .photoForm
-    {
-      display:inline;
-    }
-    .result p
-    {
-      max-width: 200px;
-      display:block;
-      padding-left:12px;
-
-    }
-    .banner_image
-    {
-      display:none;
-    }
-    @media screen and (max-width: 992px)
-    {
-      .container
-      {
-        width:100%!important;
-      }
-      .banner_image
-      {
-
-        display: block;
-        background-image: url("talvi-4.jpg");
-        height: 200px;
-        background-size: cover;
-
-      background-repeat: no-repeat;
-
-      }
-      .crop img
-      {
-        margin: 30px 20px 30px 0;
-      }
-      #pass_change_div
-      {
-        margin-top: 20px;
-      }
-      .passForm
-      {
-        margin:30px 0 30px 0;
-
-      }
-    }
-
-    @media screen and (max-width: 653px)
-    {
-      .upload_form
-      {
-
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 5px;
-      }
-      .inputfile{
-        width:46%;
-      }
-      .centered .col-lg-12
-      {
-        padding-left:0!important;
-        padding-right:0!important;
-      }
-
-    }
-    @media screen and (max-width: 528px)
-    {
-      .upload_form {
-
-        width: 100%;
-        display:block;
-      }
-      .inputfile{
-        width:70%;
-      }
-      .form-signin input
-      {
-      width:100%;
-      display:block;
-      }
-      .photoForm
-      {
-        display:block;
-        margin: 20px 0 0 0;
-      }
-      .crop
-      {
-        display:block;
-        text-align:center;
-      }
-      .crop img
-      {
-        margin: 0;
-      }
-      .form-signin button
-      {
-        display:block;
-        margin-left: 5px;
-        margin-top:0;
-      }
-      #email_result
-      {
-        max-width:100%;
-      }
-      button.desktop
-      {
-        display:none;
-      }
-      button.mobile
-      {
-        display:block;
-        margin-left:0;
-        margin-top: 10px;
-      }
-    }
-
-    </style>
 </head>
 <body>
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="container" style="background-color: #FFF;">
+      <div class="container" style="background-color:#f3f3f5;">
         <?php
-        if (($_SESSION["isStudent"] == true) || ($_SESSION["isSchool"] == true) || ($_SESSION["isAdmin"] == true)) {
+        if (($_SESSION["isStudent"] == true) || ($_SESSION["isSchool"] == true) || ($_SESSION["isAdmin"] == true) || ($_SESSION["isInst"] == true)) {
 
-if($_SESSION["isStudent"] == true)
-{
-  $sql = "SELECT * FROM user AS us LEFT JOIN student AS stu ON stu.user_id = us.user_id LEFT JOIN school AS scl ON stu.school_id = scl.school_id WHERE Email='$username'";
-  $result= mysqli_query($conn,$sql);
-  $row = $result->fetch_assoc();
-?>
-
-  <div class="row">
-
-    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Student page</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" href="student.php">
-                      <i class="fa fa-home" aria-hidden="true"></i> Profile <span class="sr-only">(current)</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="studentVisitLog.php">
-                      <i class="fa fa-user-circle-o" aria-hidden="true"></i> Log
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="settings.php">
-                      <i class="fa fa-cog" aria-hidden="true"></i> Setting
-                  </a>
-              </li>
-          </ul>
-          <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-      </div>
-    </nav>
-    <br>
-  </div>
-</div>
-<div class="col-md-12 col-sm-12 banner_image">
-
-</div>
-
-<div class="centered bordered container" style="background-color:#EDEDED;">
-  <div class="row">
-    <div class="main">
-      <h2> Settings </h2>
-    </div>
-
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="photo_wrapper_thumb" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
-        <div class="col-lg-3" style="display:inline-block;">
-        <h5> Profile picture </h5>
-      </div>
-
-          <div class="crop">
-          <!-- Photo from database -->
-          <?php
-          $sql = "SELECT * FROM user WHERE Email='$username'";
-          $sth = $conn->query($sql);
-          $result=mysqli_fetch_array($sth);
-          echo '<img class="profile_photo_thumb" src="data:image/jpeg;base64,'.base64_encode( $result['Profile_photo'] ).'" />';
+          // STUDENT SETTINGS
+          if($_SESSION["isStudent"] == true)
+          {
+            $sql = "SELECT * FROM user AS us LEFT JOIN student AS stu ON stu.user_id = us.user_id LEFT JOIN school AS scl ON stu.school_id = scl.school_id WHERE Email='$username'";
+            $result= mysqli_query($conn,$sql);
+            $row = $result->fetch_assoc();
           ?>
+
+          <div class="row">
+
+            <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand" href="student.php"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="student.php">
+                      <i class="fa fa-home" aria-hidden="true"></i> Profiili <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="log.php">
+                      <i class="fa fa-user-circle-o" aria-hidden="true"></i> Logi
+                    </a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="settings.php">
+                      <i class="fa fa-cog" aria-hidden="true"></i> Asetukset
+                    </a>
+                  </li>
+                </ul>
+                <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+              </div>
+            </nav>
+            <br>
           </div>
-          <form method="POST" action="photoUpload.php" class="upload_form" enctype="multipart/form-data">
-            <span><input type="file" name="myimage" id="file" class="inputfile" />
-            <input type="submit"></span>
-          </form>
-
-        </div>
-        <!-- Photo upload button -->
-
-      </div>
-    </div>
-
-
-
-<?php }
-elseif ($_SESSION["isSchool"] == true)
-{
-
-  ?>
-
-  <div class="row">
-
-    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">School Admin Page</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="school.php">
-                      <i class="fa fa-home" aria-hidden="true"></i> Home
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="addstudent_resp.php">
-                      <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Student
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="settings.php">
-                      <i class="fa fa-code" aria-hidden="true"></i> Setting <span class="sr-only">(current)</span>
-                  </a>
-              </li>
-          </ul>
-          <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-      </a>
-      </div>
-    </nav>
-    <br>
-  </div>
-</div>
-
-<div class="col-md-12 col-sm-12 banner_image">
-
-</div>
-<div class="centered bordered container" style="background-color:#EDEDED;">
-<div class="row">
-  <div class="main">
-    <h2> Settings </h2>
-  </div>
-
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <?php if(!empty($_SESSION['email_exist']))
-    {
-    echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>"; ?> <?php
-    unset($_SESSION['email_exist']);
-    } ?>
-    <?php if(!empty($_SESSION['pass_reset']))
-    {
-    echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>"; ?> <?php
-    unset($_SESSION['pass_reset']);
-    } ?>
-
-    <?php if(!empty($_SESSION['error']))
-    {
-    echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
-    unset($_SESSION['error']);
-    } ?>
-    <div class="wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
-      <div class="col-lg-3" id="reset_pass_div">
-      <h5> Reset user password </h5>
-    </div>
-    <div class="col-lg-8 passForm">
-      <form method="POST" action="resetPass.php">
-      <div class="search-box" style="max-width: 200px; display:inline;">
-          <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Search user" />
-          <button type="submit" class="btn desktop" style="margin-left: 20px;">Submit</button>
-          <div class="col-lg-1 result" style="display:inline;">
-      </div>
-      </div>
-      <button type="submit" class="btn mobile">Submit</button>
-
-
-    </form>
-    </div>
-  </div>
-
-  </div>
-</div>
-<?php }
-elseif ($_SESSION["isAdmin"] == true)
-{
-?>
-
-<div class="row">
-
-  <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="admin.php">Admin Page</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="admin.php">
-                      <i class="fa fa-home" aria-hidden="true"></i> Home
-                  </a>
-              </li>
-
-              <li class="nav-item">
-                  <a class="nav-link" href="addSclAd.php">
-                      <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add a school admin
-                  </a>
-              </li>
-              <li class="nav-item">
-                            <a class="nav-link" href="addstudent_resp.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add student user
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addInst.php">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Add institution
-                            </a>
-                        </li>
-
-              <li class="nav-item">
-                  <a class="nav-link" href="settings.php">
-                      <i class="fa fa-code" aria-hidden="true"></i> Settings <span class="sr-only">(current)</span>
-                  </a>
-              </li>
-          </ul>
-          <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>
-      </a>
-      </div>
-  </nav>
-  <br>
-  <br>
-  <br>
-</div>
-</div>
-<div class="col-md-12 col-sm-12 banner_image">
-
-</div>
-<div class="centered bordered container" style="background-color:#EDEDED;">
-<div class="row">
-  <div class="main">
-    <h2> Settings </h2>
-  </div>
-
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <?php if(!empty($_SESSION['email_exist']))
-    {
-    echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>"; ?> <?php
-    unset($_SESSION['email_exist']);
-    } ?>
-    <?php if(!empty($_SESSION['pass_reset']))
-    {
-    echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>"; ?> <?php
-    unset($_SESSION['pass_reset']);
-    } ?>
-
-    <?php if(!empty($_SESSION['error']))
-    {
-    echo "<div class='alert danger'>".$_SESSION['error']."</div>"; ?> <?php
-    unset($_SESSION['error']);
-    } ?>
-    <div class="photo wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
-      <div class="col-lg-3" id="reset_pass_div">
-      <h5> Reset user password </h5>
-    </div>
-    <div class="col-lg-8 passForm">
-      <form method="POST" action="resetPass.php">
-      <div class="search-box" style="max-width: 200px; display:inline;">
-          <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Search user" />
-          <button type="submit" class="btn desktop" style="margin-left: 20px;">Submit</button>
-          <div class="col-lg-1 result" style="display:inline;">
-      </div>
-      </div>
-      <button type="submit" class="btn mobile">Submit</button>
-
-
-    </form>
-    </div>
-  </div>
-
-
-  </div>
-</div>
-
-<?php }
-?>
-
-
-      <div class="pass wrapper" style="margin: 0 15px 0 15px;">
-        <?php if(!empty($_SESSION['pass_success']))
-        {
-        echo "<br><div class='alert success'>".$_SESSION['pass_success']."</div>"; ?> <?php
-        unset($_SESSION['pass_success']);
-        } ?>
-        <div class="col-lg-3" id="pass_change_div">
-        <h5> Vaihda salasanasi </h5>
-      </div>
-        <div class="col-lg-8 passForm">
-          <form name="frmChange" role="form" class="form-signin" method="POST" action="passChange.php">
-
-            <label for="InputPassword2">Vanha salasana</label>
-            <input type="password" class="form-control" id="InputPassword1" placeholder="Old Password" name="oldPassword" required>
-            <?php if(!empty($_SESSION['Oldpass']))
-            {
-            echo "<div class='alert text'>".$_SESSION['Oldpass']."</div>"; ?> <?php
-            unset($_SESSION['Oldpass']);
-            } ?>
-            <br/>
-            <label for="InputPassword2">Uusi salasana</label>
-            <input type="password" class="form-control newpass" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword2" placeholder="New Password" name="newPassword" required>
-            <?php if(!empty($_SESSION['pass_str']))
-            {
-            echo "<div class='alert text'>".$_SESSION['pass_str']."</div>"; ?> <?php
-            unset($_SESSION['pass_str']);
-            } ?>
-            <br/>
-            <label for="InputPassword3">Vahvista uusi salasana</label>
-            <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8,16}" minlength="8" id="InputPassword3" placeholder="Confirm Password" name="confirmPassword" required>
-            <?php if(!empty($_SESSION['passMatch']))
-            {
-            echo "<div class='alert text'>".$_SESSION['passMatch']."</div>"; ?> <?php
-            unset($_SESSION['passMatch']);
-            } ?> <br/>
-
-              <label for=""></label><input class="btn" type="submit" value="Vaihda" name="submit" />
-
-
-          </form>
-
         </div>
 
+        <div class="col-md-12 col-sm-12 banner_image">
+        </div>
 
-      </div>
+        <div class="centered bordered container" style="background-color:#f3f3f5;">
+          <div class="row">
+            <div class="main">
+              <h2> Asetukset </h2>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="photo_wrapper_thumb" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+                <div class="col-lg-3" style="display:inline-block;">
+                  <h5> Profiilikuva </h5>
+                </div>
+
+                <div class="crop">
+                  <!-- Photo from database -->
+                  <?php
+                  $sql = "SELECT * FROM user WHERE Email='$username'";
+                  $sth = $conn->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result['Profile_photo'] != NULL)
+                  {
+                    echo "<img class='profile_photo_thumb' src='". $row['Profile_photo'] ."'/>";
+                  }
+                  else {
+                    echo '<img class="profile_photo_thumb" style="background-color: lightgrey;"/>';
+                  }
+                  ?>
+                </div>
+                <form method="POST" action="photoUpload.php" class="upload_form photo_thumb" enctype="multipart/form-data">
+                  <input type="file" name="myimage" id="file" class="input_file" />
+                  <button type="submit" class="btn justify">Lähetä</button>
+                </form>
+              </div>
+              <!-- Photo upload button -->
+            </div>
+          </div>
+
+      <?php }
+      // END OF STUDENT SETTINGS
 
 
-
-
-    </div>
-
-
-
-
-
-
-
-<?php }
-else { ?>
-
-
-    <div class="col-lg-8 container" style="background-color: #FFF;">
+      // SCHOOL ADMIN SETTINGS
+      elseif ($_SESSION["isSchool"] == true)  {
+        ?>
 
         <div class="row">
 
-            <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse bg-primary centered">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-                <a class="navbar-brand" href="#">Logo</a>
+          <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-
-
-                </div>
-
-            </nav>
-            <br>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="school.php">
+                    <i class="fa fa-home" aria-hidden="true"></i> Etusivu
+                  </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="settings.php">
+                    <i class="fa fa-code" aria-hidden="true"></i> Asetuksista <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+              </ul>
+              <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a></a>
+            </div>
+          </nav>
+          <br>
+        </div>
         </div>
 
-        <br>
-        <br>
-        <!-- /navbar -->
-        <div class="restrict"><?php echo "You are not authorized to access this page."; ?> </div>
-            <br>
 
+        <div class="col-md-12 col-sm-12 banner_image">
+        </div>
+
+        <div class="centered bordered container" style="background-color:#f3f3f5;">
+          <div class="row">
+            <div class="main">
+              <h2> Asetukset </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <?php
+              if(!empty($_SESSION['email_exist']))
+              {
+              echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>";
+              unset($_SESSION['email_exist']);
+              }
+
+              if(!empty($_SESSION['pass_reset']))
+              {
+              echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>";
+              unset($_SESSION['pass_reset']);
+              }
+
+              if(!empty($_SESSION['error']))
+              {
+              echo "<div class='alert danger'>".$_SESSION['error']."</div>";
+              unset($_SESSION['error']);
+              } ?>
+
+              <div class="wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+                <div class="col-lg-3" id="reset_pass_div">
+                  <h5> Palauta käyttäjän salasana </h5>
+                </div>
+                <div class="col-lg-8 passForm">
+                  <form method="POST" action="resetPass.php">
+                    <div class="search-box" style="max-width: 200px; display:inline;">
+                      <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Hae käyttäjää" />
+                      <button type="submit" class="btn desktop" style="margin-left: 20px;">Lähetä</button>
+                      <div class="col-lg-1 result" style="display:inline;">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn mobile">Lähetä</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      <?php }
+      // END OF SCHOOL ADMIN SETTINGS
+
+
+      // ADMIN SETTINGS
+      elseif ($_SESSION["isAdmin"] == true)
+      {
+      ?>
+
+      <div class="row">
+
+        <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered admin">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="admin.php">
+                  <i class="fa fa-home" aria-hidden="true"></i> Etusivu
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addSclAd.php">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää koulun pääkäyttäjä
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addstudent.php">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää opiskelija
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addInst.php">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i> Lisää instituutio
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="settings.php">
+                  <i class="fa fa-code" aria-hidden="true"></i> Asetukset <span class="sr-only">(current)</span>
+                </a>
+              </li>
+            </ul>
+            <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a></a>
+          </div>
+        </nav>
+      </div>
+      </div>
+
+    <div class="col-md-12 col-sm-12 banner_image">
+    </div>
+
+    <div class="centered bordered container" style="background-color:#f3f3f5;">
+      <div class="row">
+        <div class="main">
+          <h2> Asetukset </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <?php if(!empty($_SESSION['email_exist']))
+          {
+          echo "<div class='alert danger'>".$_SESSION['email_exist']."</div>";
+          unset($_SESSION['email_exist']);
+          }
+
+          if(!empty($_SESSION['pass_reset']))
+          {
+          echo "<div class='alert success'>". $_SESSION['pass_reset']."</div>";
+          unset($_SESSION['pass_reset']);
+          }
+
+          if(!empty($_SESSION['error']))
+          {
+          echo "<div class='alert danger'>".$_SESSION['error']."</div>";
+          unset($_SESSION['error']);
+          }
+          ?>
+          <div class="wrapper" style="border-bottom: 1px solid #0275d8; margin: 0 15px 0 15px;">
+            <div class="col-lg-3" id="reset_pass_div">
+              <h5> Nollaa käyttäjän salasana </h5>
+            </div>
+            <div class="col-lg-8 passForm">
+              <form method="POST" action="resetPass.php">
+                <div class="search-box" style="max-width: 200px; display:inline;">
+                  <input type="text" class="form-control" name="email_result" id="email_result" autocomplete="off" placeholder="Hae käyttäjää" />
+                  <button type="submit" class="btn desktop" style="margin-left: 20px;"> Lähetä </button>
+                  <div class="col-lg-1 result" style="display:inline;">
+                  </div>
+                </div>
+                <button type="submit" class="btn mobile">Lähetä</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
 
 
+<?php }
+// END OF ADMIN SETTINGS
 
 
+// INSTITUTION SETTINGS
+elseif ($_SESSION["isInst"] == true)
+{
+  ?>
+  <div class="row">
+    <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img src="img/Lahti_logo_nega_RGB_web.jpg" /></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Institution.php">
+              <i class="fa fa-home" aria-hidden="true"></i> Etusivu
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="settings.php">
+              <i class="fa fa-code" aria-hidden="true"></i> Asetukset <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+        <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px; padding-top:7px; font-size: 16px;" href="logout.php">Kirjaudu ulos &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+      </div>
+    </nav>
+  </div>
+</div>
+  <div class="centered bordered container" style="background-color:#f3f3f5;">
+  <?php }
+  // END OF INSTITUTION SETTINGS
 
 
+  // PASSWORD CHANGE IN SETTINGS -PAGE
+  ?>
+
+  <div class="pass wrapper" style="margin: 0 15px 0 15px;">
+    <?php if(!empty($_SESSION['pass_success']))
+    {
+      echo "<br><div class='alert success'>".$_SESSION['pass_success']."</div>";
+      unset($_SESSION['pass_success']);
+    } ?>
+
+    <div class="col-lg-3" id="pass_change_div">
+      <h5> Vaihda salasanasi </h5>
+    </div>
+
+    <div class="col-lg-8 passForm">
+      <form name="frmChange" role="form" class="form-signin" method="POST" action="passChange.php">
+        <label for="InputPassword2">Vanha salasana</label>
+        <input type="password" class="form-control" id="InputPassword1" placeholder="Vanha salasana" name="oldPassword" required>
+        <?php if(!empty($_SESSION['Oldpass']))
+        {
+        echo "<div class='alert text'>".$_SESSION['Oldpass']."</div>";
+        unset($_SESSION['Oldpass']);
+        } ?>
+
+        <br/>
+        <label for="InputPassword2">Uusi salasana</label>
+        <input type="password" class="form-control newpass" pattern="[0-9a-zA-Z]{8}" minlength="8" id="InputPassword2" placeholder="Uusi salasana" name="newPassword" required>
+        <?php if(!empty($_SESSION['pass_str']))
+        {
+        echo "<div class='alert text'>".$_SESSION['pass_str']."</div>";
+        unset($_SESSION['pass_str']);
+        } ?>
+
+        <br/>
+        <label for="InputPassword3">Vahvista uusi salasana</label>
+        <input type="password" class="form-control" pattern="[0-9a-zA-Z]{8}" minlength="8" id="InputPassword3" placeholder="Vahvista uusi salasana" name="confirmPassword" required>
+        <?php if(!empty($_SESSION['passMatch']))
+        {
+        echo "<div class='alert text'>".$_SESSION['passMatch']."</div>";
+        unset($_SESSION['passMatch']);
+        } ?>
+        <br/>
+        <label for=""></label><input class="btn" type="submit" value="Vaihda" name="submit" />
+      </form>
+    </div>
+  </div>
 <?php
-}
-// print_r($_SESSION);
-?>
+// END OF PASSWORD CHANGE
+
+
+// STUDENT FOOTER
+if ($_SESSION["isStudent"] == true)
+{ ?>
+      <div class="row footer">
+        <div class="col-lg-12" style="border-top:1px solid;">
+          <div class="tooltipz"><i class="fa fa-question fa-2x" aria-hidden="true"></i></p>
+              <span class="tooltiptextz">Asetuksista voit muuttaa profiilikuvaasi ja salasanaasi.</span>
+          </div>
+        </div>
+      </div>
+      <?php } ?>
+    </div>
+    <?php }
+// END OF STUDENT FOOTER
+
+// Show if user is none of the above
+  else { ?>
+
+    <div class="row">
+        <nav class="col-lg-12 navbar navbar-toggleable-md navbar-inverse centered">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/img/Lahti_logo_nega_RGB_web.jpg" /></a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          </div>
+          <a class="navbar-brand pull-sm-right mr-0" style="padding-right: 30px;" href="index.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+        </nav>
+        <br>
+    </div>
+    <br>
+    <br>
+    <!-- /navbar -->
+    <div class="restrict"><?php echo "Sinulla ei ole oikeuksia katsella sivua."; ?> </div>
+    <?php
+    } ?>
+  </div>
 </div>
 
 

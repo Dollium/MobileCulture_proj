@@ -3,12 +3,16 @@ date_default_timezone_set('Europe/Helsinki');
 
 $servername = 'localhost';
 $username = 'root';
-$password = 'root';
-$db = 'mobileCulture';
+$password = 'Dsa987zxc!';
+$db = 'mobileculture';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
 // Check connection
+if(!$conn)
+{
+  echo "can't connect";
+}
 
 function finnish_dateformat($date)
 {

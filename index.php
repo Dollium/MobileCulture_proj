@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); ?>
+<?php session_start();
+unset($_SESSION['pass_success']);
+ ?>
 <head>
     <meta charset="UTF-8">
     <title>Culture Mobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+    <style>
+
+    body
+    {
+      background-image: none;
+    }
+    </style>
 </head>
 
 <body>
 
     <div class="main-navbar">
-        <h1><i class="fa fa-commenting"></i> Our application name</h1>
+        <h1><i class="fa fa-commenting"></i> Kulttuuri mobiili</h1>
     </div>
     <!-- div.main-header -->
 
     <div class="box-join">
-        <p>Log in</p>
+        <p>Kirjaudu sisään</p>
         <form method="POST" id="formJoin" action="login.php">
-            <input type="text" placeholder="USERNAME" class="data-input" id="username" name="username">
-            <input type="password" placeholder="PASSWORD" class="data-input" id="password" name="password">
-
+            <input type="text" placeholder="Käyttäjätunnus" class="data-input" id="username" name="username">
+            <input type="password" placeholder="Salasana" class="data-input" id="password" name="password">
             <?php if(!empty($_SESSION['field_null']))
             {
-            ?>
-            <div class="alert danger"></div>
-            <?php
-            echo $_SESSION['field_null']; ?> <?php
+            echo "<div class='alert danger_text'>".$_SESSION['field_null']."</div>"; ?> <?php
             unset($_SESSION['field_null']);
             } ?>
+
             <?php if(!empty($_SESSION['error']))
             {
-            ?>
-            <div class="alert danger"></div>
-            <?php
-            echo $_SESSION['error']; ?> <?php
+            echo "<div class='alert danger_text'>".$_SESSION['error']."</div>"; ?> <?php
             unset($_SESSION['error']);
             } ?>
+
             <br>
             <br>
-            <button class="btn btn-primary">START</button>
+            <button class="btn btn-primary">Kirjaudu</button>
           </form>
         <!-- form#formJoin -->
     </div>
