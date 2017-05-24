@@ -4,7 +4,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $ID = $_SESSION['id'];
-// print_r($_SESSION);
+print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +15,19 @@ $ID = $_SESSION['id'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name=description content="QR Code Scanner for Mobile Culture Application">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="qrscan.js"></script>
 
-    <title>Title</title>
+    <title> QR Scanner </title>
 </head>
 
 <body>
@@ -63,23 +70,32 @@ $ID = $_SESSION['id'];
             <br>
         </div>
         <!-- /NAV -->
-<br/>
-        <!-- INSTITUTION  LIST-->
-        <div class="col-lg-12" style="text-align: center;">
-        <form  method="POST" style="padding: 70px 0;">
-            <button name="scan" type="submit" class="btn btn-primary scan" style="padding: 20px 20px;">SCAN QR</button>
-        </form>
-      </div>
-
-
-
-
-
+		<br/>
+        <!-- QR SCANNER CANVAS-->
+        <div class="col-lg-12" id="mainbody" style="text-align: center;">
+        	
+	 		<div class="col-lg-12" style="text-align: center;">
+	  			<p><video id="video" width="320" height="240" autoplay=true/></p>
+	  		</div>
+	  		 	  		
+	  		<p><button name="scan" onclick="load()" class="btn btn-primary" style="padding: 20px 20px;"> START SCANNING </button></p>
+			
+	  		<form action='QRscan.php' id="institution" method="POST">
+		  		<div class="col-lg-12" style="text-align: center;">
+		  			<div id="result"></div>
+		  			<p>
+						<button id="record" onclick="stop()" class="btn btn-primary" style="padding: 20px 20px;"> RECORD VISIT </button>
+					</p>
+		  		</div>  				
+        	</form>
+        	
+	  		
+			<canvas id="qr-canvas" width="800" height="600" style="display:none"></canvas>
+		
+      	</div>	
     </div>
 
-
     <!-- jQuery first, then bootstrap js -->
-
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
