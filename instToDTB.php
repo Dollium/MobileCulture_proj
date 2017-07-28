@@ -9,38 +9,51 @@ include 'config.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
+function better_crypt($input, $rounds = 10)
+{
+    $crypt_options = array(
+        'cost' => $rounds
+    );
+    return password_hash($input, PASSWORD_BCRYPT, $crypt_options);
+}
+
 $ID = mysqli_real_escape_string($conn, ($_POST['instID']));
 if(isset($_POST['institutionEmail']) && $_POST['institutionEmail'] != ''){
-    var_dump($_POST);
 
+  if (!filter_var($_POST['institutionEmail'], FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['format'] = "Sähköpostiosoite ei kelpaa. Tarkista sähköpostin muoto.";
+  }
+
+  else {
+    var_dump($_POST);
     echo "Institution id is ".$ID."";
     $insertToUser = mysqli_query($conn, "INSERT INTO user
-    (Email, Password, user_type_id ) VALUES ('".$_POST['institutionEmail']."','".md5(123456)."'
-, 4)");
+    (Email, First_name, Last_name, Password, user_type_id ) VALUES ('".$_POST['institutionEmail']."','','','".better_crypt(Kultmob1)."', 4)");
+
     if(!$insertToUser){
-        $_SESSION['email_taken'] = 'This email is already in the database.';
+        $_SESSION['email_taken'] = 'Sähköpostiosoite on jo käytössä.';
     }
+
     else {
       $query = "SELECT user_id FROM user WHERE Email = '".$_POST['institutionEmail']."'";
       $result = mysqli_query($conn, $query);
 
-      while($row = mysqli_fetch_array($result))
-      {
+      while($row = mysqli_fetch_array($result)) {
           $thisInstID = $row[0];
-
       }
-   echo $thisInstID.$ID;
+      // echo $thisInstID.$ID;
 
       $insertToInstitution = mysqli_query($conn, "UPDATE `institution` SET
       `institution_user_id` = '$thisInstID' WHERE `institution_id` = '$ID'");
-      echo  $insertToInstitution;
-      $_SESSION['success_registration'] = 'The user has successfully been registered';
-
-  }
-
+      // echo  $insertToInstitution;
+      $_SESSION['success_registration'] = 'Käyttäjä rekisteröity onnistuneesti';
     }
+  }
+}
 
 else {
-      $_SESSION['error'] = 'There was an error with your input. Please make sure all fields are filled out.';
+  $_SESSION['error'] = 'Antamissasi tiedoissa oli jotain vikaa. Varmista että kaikki tiedot ovat täytettyinä.';
 }
+
 header('location:addInst.php');

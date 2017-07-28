@@ -1,3 +1,78 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    background-image: url("/img/taustakuva_sininen1.jpg");
+    background-repeat: no-repeat; /* don't tile the image */
+    background-attachment: fixed; /* force image to stay put */
+    background-size:cover;
+}
+table {
+    font-family: "Roboto", helvetica, arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+thead th{
+  font-weight: 100!important;
+  border-bottom:5px solid #9ea7af;
+  font-size: 20px;
+}
+td, th
+{
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #EBEBEB;
+}
+h2
+{
+      color: #0050b0!important;
+}
+h4
+{
+  padding-bottom: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+th{
+  font-weight: 100!important;
+  border-bottom:5px solid #9ea7af;
+  font-size: 20px;
+  background: #333;
+  color: white;
+  font-weight: bold;
+}
+td, th
+{
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border: 1px solid #dddddd;
+}
+.centered
+{
+  margin:auto;
+}
+.container-fluid
+{
+   padding-left: 0!important;
+   padding-right: 0!important;
+}
+.navbar
+{
+  color: #0050b0;
+}
+.navbar-brand img
+{
+  height: 50px;
+    width: 143px;
+}
 .main-navbar {
     padding: 15px;
     text-align: center;
@@ -27,36 +102,6 @@
     color: #555;
     max-width: calc(100% - 16px);
 }
-
-#formJoin .alert {
-    color: #fff;
-    width: 300px;
-    padding: 8px 7px;
-    margin: auto;
-    margin-top: 10px;
-    text-align: left;
-    display: none;
-}
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
 .button {
     background-color: #e0e0e0;
     /* Green */
@@ -71,10 +116,27 @@ tr:nth-child(even) {
 }
 
 .button:hover {
-    background-color: #bdbdbd;
+    background-color: #49515e;
     color: white;
 }
-
+.btn
+{
+  background-color: #dddddd;
+}
+.btn:hover, .btn:active
+{
+  background-color: #49515e;
+  color: white;
+}
+.btn-primary
+{
+  background-color: #0050b0!important;
+  border-color: #0050b0!important;
+}
+.btn-primary:hover, .btn-primary:active
+{
+  background-color: #04acdd!important;
+}
 .pageButton {
     margin: 8px;
     border-radius: 3px;
@@ -86,6 +148,643 @@ tr:nth-child(even) {
     flex-direction: row;
     justify-content: center;
 }
+
+
+
+.tooltipz {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black;
+float:right;
+margin-right: 50px;
+padding-top:10px;
+}
+
+.tooltipz .tooltiptextz {
+visibility: hidden;
+width: 310px;
+background-color: black;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px 0;
+bottom: 50px;
+right:40px;
+font-size: 15px;
+/* Position the tooltip */
+position: absolute;
+z-index: 1;
+}
+
+.tooltipz:hover .tooltiptextz {
+visibility: visible;
+}
+.navbar {
+background-color: #0050b0 !important;
+}
+
+
+/* Alerts */
+
+.alert
+{
+  margin-bottom: 0!important;
+  width: 100%;
+}
+.danger
+{
+  border: 1px solid #d33f3f;
+  background-color: rgba(247, 70, 70, 0.68);
+}
+.danger_text
+{
+  color: rgba(247, 70, 70, 1);
+}
+.success
+{
+  border: 1px solid #b4d6b4;
+background-color: #c2f1c2;
+}
+.alert.text
+ {
+   padding:0 0 0 10px!important;
+   margin-bottom:0!important;
+   color:red;
+ }
+
+.mobile{
+  display:none;
+}
+.photo_container
+{
+  height:400px;
+  margin-top: 70px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.photo.wrapper
+{
+height: 470px;
+text-align:center;
+}
+
+.inputfile, .update_btn {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label, .update_btn + label {
+    margin-top: 10px;
+    padding: 0 8px 3px 8px;
+    border-radius: 4px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #0050b0;
+    display: inline-block;
+}
+.btn.justify
+{
+  margin-left: 10px;
+}
+.wrapper.log_height
+{
+      min-height: 500px;
+}
+
+.inputfile + label
+{
+cursor: pointer; /* "hand" cursor */
+}
+
+.fa-question:hover
+{
+  color:#0050b0;
+}
+
+.min_visits tr
+{
+      color: #666B85;
+      border-top: 1px solid #666B85;
+}
+
+.min_visits tr:hover td
+{
+    background: #49515e;
+    color: #FFFFFF;
+    border-top: 1px solid #22262e;
+    border-bottom: 1px solid #22262e;
+  }
+  .min_visits td
+  {
+    padding: 4px;
+    padding-left: 20px;
+  }
+.min_visits td:nth-child(n) {
+  border-right: 1px solid #666B85;
+}
+.student_id
+{
+      margin-bottom: 10px;
+      margin-top: 40px;
+}
+.student_id td, .student_id th {
+    font-size: 24px;
+    background-color: #FFF;
+}
+
+.text_header
+{
+  font-size: 30px;
+}
+.boldie
+{
+  font-weight: bold;
+}
+#badge
+{
+  color: #25b825;
+}
+
+
+.bordered
+{
+  border: 1px solid;
+}
+.banner_image
+{
+  display:none;
+}
+.stats
+{
+  margin-top: 50px;
+}
+.stat
+{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 10px;
+}
+.stat_icon
+{
+  border-right: 1px solid grey;
+  padding:0;
+  padding-left: 25px;
+}
+.restrict
+{
+  font-size: 22px;
+
+}
+.profile_photo
+ {
+   /*width: 360px!important;*/
+   /*height: 400px!important;*/
+    width: 100%!important;
+    height: 100%!important;
+    border: 5px solid white;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.44);
+    border-radius: 5px;
+ }
+ #outerStuInfo
+ {
+   height: 470px;
+   padding-right: 50px;
+ }
+ #studentInfo
+ {
+   height:400px;
+   margin-top: 70px;
+   padding-top:40px;
+   margin-left:auto;
+   margin-right:auto;
+   border-radius: 10px;
+ }
+.min_log
+{
+margin-top:70px;
+}
+.filter_by_inst
+{
+width: 80%;
+margin: auto;
+padding: 50px 20px 0 20px;
+}
+.box-code
+{
+  text-align:center;
+}
+.box-code button
+{
+  margin-left:50px;
+}
+.box-code input
+{
+  width: 260px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 10px 20px 10px 10px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.text-sm-center
+{
+  max-width:100%;
+}
+
+
+
+button.mobile
+{
+  display:none;
+  margin-left: 20px;
+}
+/* Settings page styles */
+
+.passForm, .photoForm
+{
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+}
+.passForm
+{
+  display:inline-block;
+}
+.photoForm
+{
+  display:inline;
+}
+.result p
+{
+  max-width: 200px;
+  display:block;
+  padding-left:12px;
+
+}
+.form-signin input
+{
+  width: 50%;
+  display:inline;
+  margin-top: 5px;
+}
+.form-signin button
+{
+  margin-left: 5px;
+  margin-top: 25px;
+}
+.form-signin label
+{
+  width: 200px;
+}
+.crop img {
+  width: 170px;
+  height: 200px;
+  margin: 0 50px 20px 30px;
+  border: 7px solid white;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.44);
+  border-radius: 5px;
+}
+.crop
+{
+  display:inline;
+}
+.main
+{
+margin: 15px;
+}
+.upload_form
+{
+display:inline;
+margin-top: 40px;
+}
+
+#pass_change_div
+{
+  display:inline-block;
+  margin-top: 90px;
+  vertical-align:top;
+}
+#reset_pass_div
+{
+  display:inline-block;
+  margin-top: 40px;
+  margin-bottom:40px;
+  vertical-align:top;
+}
+#email_result
+{
+  max-width: 200px;
+  display: inline;
+}
+
+/* No rights - page */
+
+.restrict
+{
+  font-size: 22px;
+}
+@media (max-width: 1200px) and (min-width:992px)
+{
+  .admin .nav-link {
+    font-size: 14px;
+    }
+}
+    @media screen and (max-width: 992px) {
+      .desktop{
+        display:none;
+      }
+      .mobile{
+        display:block;
+      }
+
+      label:hover, label:active, .inputfile:hover+label, .inputfile:active+label {
+          color: #49515e;
+          background-color: transparent;
+      }
+        #outerStuInfo{
+            padding-right: 0px;
+        }
+        .container-fluid
+        {
+          padding-left:0!important;
+          padding-right:0!important;
+        }
+        .stat_icon
+        {
+           max-width: 100px;
+        }
+          .container
+          {
+            width:100%!important;
+          }
+          .banner_image
+          {
+
+            display: block;
+            background-image: url("/img/taustakuva_sininen1.jpg");
+            height: 200px;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+          }
+          .photo.wrapper
+          {
+                height: 380px;
+          }
+          .photo_container
+          {
+            margin-top: 0;
+            height:328px;
+            position: relative;
+            z-index: 10;
+            bottom: 70px;
+          }
+          #studentInfo
+          {
+            margin: 10px auto;
+          }
+
+
+          .min_log
+          {
+            margin-top:0px;
+          }
+          .crop img
+          {
+            margin: 30px 20px 30px 0;
+          }
+          #pass_change_div
+          {
+            margin-top: 20px;
+          }
+          .passForm
+          {
+            margin:30px 0 30px 0;
+
+          }
+    }
+    @media screen and (max-width: 653px)
+    {
+      .upload_form
+      {
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 5px;
+      }
+      .inputfile{
+        width:46%;
+      }
+
+    }
+    @media screen and (max-width: 528px)
+    {
+      .upload_form {
+
+        width: 100%;
+        display:block;
+      }
+      .inputfile{
+        width:70%;
+      }
+      .form-signin input
+      {
+      width:100%;
+      display:block;
+      }
+      .photoForm
+      {
+        display:block;
+        margin: 20px 0 0 0;
+      }
+      .crop
+      {
+        display:block;
+        text-align:center;
+      }
+      .crop img
+      {
+        margin: 0;
+      }
+      .form-signin button
+      {
+        display:block;
+        margin-left: 5px;
+        margin-top:0;
+      }
+      #email_result
+      {
+        max-width:100%;
+      }
+      button.desktop
+      {
+        display:none;
+      }
+      button.mobile
+      {
+        display:block;
+        margin-left:0;
+        margin-top: 10px;
+      }
+    }
+    @media screen and (max-width: 990px) and (min-width: 401px) {
+
+
+        .profile_photo
+        {
+            max-width: 360px !important;
+            height: 400px !important;
+            margin: auto;
+        }
+        #studentInfo{
+            width: 90%;
+        }
+        .totalVisits
+        {
+              max-width: 170px;
+        }
+
+    }
+
+
+    @media screen and (max-width: 430px) and (min-width: 400px)
+    {
+      .box-code button
+      {
+        margin: 20px 15px 15px 15px;
+      }
+      .tooltipz .tooltiptextz
+      {
+        width: 210px;
+      }
+      .upload_form.photo_thumb
+      {
+        text-align:center;
+      }
+      .btn.justify
+      {
+        margin-top: 20px;
+      }
+    }
+    @media screen and (max-width: 400px) {
+      .tooltipz .tooltiptextz
+      {
+        width: 210px;
+      }
+      .tooltipz
+      {
+        margin-right: 10px;
+      }
+      .btn.justify
+      {
+        margin-top: 20px;
+      }
+        .box-code button
+        {
+          margin: 20px 0 15px 0;
+        }
+        .filter_by_inst option
+        {
+          width: 80%;
+          font-size: 12px;
+        }
+
+        .filter_by_inst
+        {
+          margin: 0;
+          padding: 20px 0 7px 0;
+          max-width:320px;
+        }
+
+        .profile_photo
+        {
+
+            margin: auto;
+            height: auto;
+        }
+        .stat_icon
+        {
+          max-width: 100px;
+        }
+        .totalVisits
+        {
+            max-width: 170px;
+        }
+        #studentInfo
+        {
+            width: 90%;
+            margin: auto;
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+            padding-top: 10px;
+            height:300px;
+        }
+        #outerStuInfo{
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+            height:300px;
+        }
+        .photo.wrapper
+        {
+          height:120px;
+        }
+
+        .student_id
+        {
+          margin-top: 10px;
+        }
+        .student_id td:first-child
+        {
+           display:none;
+        }
+        .student_id td
+        {
+          letter-spacing: 2px;
+           border:0;
+           background-color: #f3f3f5;
+           border-style: none;
+           text-align:center;
+        }
+        .student_id tr
+        {
+           border-bottom:1px solid grey;
+
+
+        }
+      .inputfile + label
+        {
+          color: #9ea7af;
+          background-color: transparent;
+          margin-top: 0;
+        }
+        #studentInfo.bordered
+        {
+          border:0px;
+        }
+        .photo_container
+        {
+          height: 160px!important;
+          width: 170px!important;
+        }
+        h2.boldie
+        {
+          display:none;
+        }
+
+
+    }
 
 @media screen and (min-width: 640px) {
     .logTable {
@@ -115,5 +814,3 @@ tr:nth-child(even) {
         display: flex;
     }
 }
-
-
